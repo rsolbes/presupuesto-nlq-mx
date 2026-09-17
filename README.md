@@ -33,4 +33,4 @@ El portal de la SHCP bloquea el acceso automatizado: las descargas son manuales.
 
 ## Estado
 
-Fase 1 (preparacion de datos), iniciando. El cronograma completo esta en `CLAUDE.md`.
+Fase 1 (preparacion de datos), iniciando.
