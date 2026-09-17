@@ -1,4 +1,4 @@
-# presupuesto-nlq
+# presupuesto-nlq-mx
 
 Sistema de consulta en lenguaje natural sobre informacion presupuestaria publica de Mexico: traduccion de preguntas a SQL sobre datos de la SHCP y recuperacion aumentada sobre normatividad, con el SQL ejecutado o la cita documental siempre a la vista.
 

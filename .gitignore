@@ -77,3 +77,7 @@ Desktop.ini
 
 # --- Claude Code -----------------------------------------------------------
 .claude/settings.local.json
+
+# --- Contexto local de Claude Code -----------------------------------------
+# Contiene datos personales del autor; no se publica.
+CLAUDE.md
