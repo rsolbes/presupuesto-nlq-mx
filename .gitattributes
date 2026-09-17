@@ -1,0 +1,15 @@
+# Normaliza los finales de linea dentro del repositorio a LF.
+# Evita diffs de archivos completos por cambiar de editor o de maquina,
+# lo que importa porque el historial respalda resultados experimentales.
+* text=auto eol=lf
+
+# Scripts que Windows necesita con CRLF.
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binarios: git no debe tocarlos ni intentar diffear su contenido.
+*.docx binary
+*.xlsx binary
+*.pdf   binary
+*.zip   binary
