@@ -1,0 +1,79 @@
+# ---------------------------------------------------------------------------
+# presupuesto-nlq — .gitignore
+#
+# Criterio: se ignora lo que sea regenerable, pesado o secreto. NO se ignoran
+# los registros de experimentos (prompts, salidas, evaluaciones): la tesis
+# exige que queden versionados.
+# ---------------------------------------------------------------------------
+
+# --- Datos originales y derivados -----------------------------------------
+# Los archivos de la SHCP se descargan a mano y pesan demasiado para git.
+# Se versiona el procedimiento de obtencion (fecha, URL, hash), no el archivo.
+data/raw/*
+data/interim/*
+data/processed/*
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+!data/**/PROCEDENCIA.md
+!data/**/*.md
+
+# --- Secretos y configuracion local ---------------------------------------
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+credentials.json
+secrets.toml
+appsettings.Development.json
+
+# --- Python ----------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# --- Artefactos de modelos e indices (regenerables, pesados) ---------------
+# Indices vectoriales y embeddings: se reconstruyen con el codigo versionado.
+*.faiss
+*.ann
+.chroma/
+models/
+embeddings/
+
+# --- SQL Server ------------------------------------------------------------
+*.mdf
+*.ldf
+*.ndf
+*.bak
+
+# --- Ofimatica -------------------------------------------------------------
+# Archivos de bloqueo que Word y Excel crean al abrir un documento.
+~$*.doc*
+~$*.xls*
+~$*.ppt*
+
+# --- Editores y sistema operativo ------------------------------------------
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# --- Claude Code -----------------------------------------------------------
+.claude/settings.local.json
