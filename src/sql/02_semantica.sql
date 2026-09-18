@@ -19,13 +19,16 @@
 -- preguntas mas naturales. El capitulo es el primer digito de la partida.
 --
 -- Fuente: Clasificador por Objeto del Gasto del Consejo Nacional de
--- Armonizacion Contable (CONAC).
--- Verificacion: los capitulos 1000 a 7000 coinciden con los que reporta la
--- Cuenta Publica 2024 en el estado analitico del ISSSTE
--- (data/raw/Verificacion/51GYN.03.F_OBJGASTO.xls). Los capitulos 8000 y 9000
--- no aparecen en ese documento porque el ISSSTE no ejerce gasto en ellos:
--- PENDIENTE verificarlos contra el clasificador vigente del CONAC antes de
--- citarlos en la tesis.
+-- Armonizacion Contable (CONAC), emitido en el DOF el 9 de diciembre de 2009,
+-- ultima reforma publicada en el DOF el 22 de diciembre de 2014
+-- (data/raw/Verificacion/NOR_01_02_006.pdf). Los nueve capitulos se
+-- verificaron contra ese documento; los capitulos 1000 a 7000 coinciden
+-- ademas con los que reporta la Cuenta Publica 2024 en el estado analitico
+-- del ISSSTE.
+--
+-- Los valores llevan acentos aunque estos comentarios no: son datos que el
+-- sistema compara contra texto en espanol, y un nombre sin acento no
+-- coincidiria con el que escribiria un usuario o un modelo.
 -- ===========================================================================
 
 CREATE TABLE IF NOT EXISTS presupuesto.dim_capitulo (
@@ -39,10 +42,10 @@ INSERT INTO presupuesto.dim_capitulo (capitulo_id, capitulo_desc) VALUES
     (3000, 'Servicios generales'),
     (4000, 'Transferencias, asignaciones, subsidios y otras ayudas'),
     (5000, 'Bienes muebles, inmuebles e intangibles'),
-    (6000, 'Inversion publica'),
+    (6000, 'Inversión pública'),
     (7000, 'Inversiones financieras y otras provisiones'),
     (8000, 'Participaciones y aportaciones'),
-    (9000, 'Deuda publica')
+    (9000, 'Deuda pública')
 ON CONFLICT (capitulo_id) DO UPDATE SET capitulo_desc = EXCLUDED.capitulo_desc;
 
 COMMENT ON TABLE presupuesto.dim_capitulo IS
