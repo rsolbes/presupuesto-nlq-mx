@@ -13,7 +13,7 @@ Un xlsx no puede presentar renglones malformados: el defecto de escapado es excl
 | 2022 | 220,505 | 220,508 | -3 | 4 |
 | 2023 | 209,732 | 209,733 | -1 | 3 |
 | 2024 | 205,012 | 205,015 | -3 | 3 |
-| 2025 | 210,458 | falta | - | - |
+| 2025 | 210,458 | 210,458 | +0 | 0 |
 
 ## 2. Totales por medida (millones de pesos)
 
@@ -73,6 +73,17 @@ Un xlsx no puede presentar renglones malformados: el defecto de escapado es excl
 | adefas | 43,877.2 | 43,877.2 | +0.0 | si |
 | ejercido | 10,563,856.6 | 10,554,159.3 | +9,697.3 | NO |
 
+### Ejercicio 2025
+
+| Medida | CSV | XLSX | Diferencia | Coincide |
+|---|---:|---:|---:|---|
+| aprobado | 10,795,085.1 | 10,795,085.1 | +0.0 | si |
+| modificado | 11,175,477.3 | 11,175,477.3 | +0.0 | si |
+| devengado | 11,276,211.2 | 11,276,211.2 | +0.0 | si |
+| pagado | 11,091,126.6 | 11,091,126.6 | +0.0 | si |
+| adefas | 75,720.6 | 75,720.6 | +0.0 | si |
+| ejercido | 11,272,216.4 | 11,272,216.4 | +0.0 | si |
+
 ## 3. Celdas de importe sin valor
 
 | Ejercicio | Formato | aprobado | modificado | devengado | pagado | adefas | ejercido |
@@ -88,6 +99,7 @@ Un xlsx no puede presentar renglones malformados: el defecto de escapado es excl
 | 2024 | csv | 0 | 0 | 0 | 0 | 0 | 0 |
 | 2024 | xlsx | 0 | 0 | 0 | 0 | 0 | 0 |
 | 2025 | csv | 0 | 0 | 0 | 0 | 0 | 0 |
+| 2025 | xlsx | 0 | 0 | 0 | 0 | 0 | 0 |
 
 ## 4. Llaves naturales que resultan ambiguas
 
@@ -104,6 +116,7 @@ Un xlsx no puede presentar renglones malformados: el defecto de escapado es excl
 | 2024 | csv | `finalidad_id` |
 | 2024 | xlsx | ninguna |
 | 2025 | csv | ninguna |
+| 2025 | xlsx | ninguna |
 
 ## 5. Encabezados por formato
 
@@ -120,3 +133,4 @@ Un xlsx no puede presentar renglones malformados: el defecto de escapado es excl
 | 2024 | csv | `Ciclo`, `ID_RAMO`, `DESC_RAMO`, `ID_UR`, `DESC_UR`, `GPO_FUNCIONAL` |
 | 2024 | xlsx | `Ciclo`, `ID_RAMO`, `DESC_RAMO`, `ID_UR`, `DESC_UR`, `GPO_FUNCIONAL` |
 | 2025 | csv | `Ciclo`, `R`, `RAMO_DESC`, `UR`, `UR_DESC`, `FI` |
+| 2025 | xlsx | `Ciclo`, `R`, `DESC_RAMO`, `UR`, `DESC_UR`, `GPO_FUNCIONAL` |
