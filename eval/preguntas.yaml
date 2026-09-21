@@ -657,3 +657,360 @@
   autor: asistente-ia
   estado: propuesta
   fecha: '2026-09-21'
+
+- id: P0042
+  pregunta: ¿Cuánto presupuesto se le aprobó a la Secretaría de Educación Pública para 2025?
+  ruta: sql
+  comportamiento: responder
+  origen:
+    tipo: generada_ia
+    referencia: 'matriz de cobertura, lote G1: administrativa / total'
+  sql: |
+    SELECT sum(aprobado) AS aprobado
+    FROM semantica.gasto
+    WHERE ejercicio = 2025
+      AND ramo_clave = 11
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+
+- id: P0043
+  pregunta: ¿Cuánto dinero ejerció la Guardia Nacional en 2023?
+  ruta: sql
+  comportamiento: responder
+  origen:
+    tipo: generada_ia
+    referencia: 'matriz de cobertura, lote G1: administrativa / total (unidad responsable)'
+  sql: |
+    SELECT sum(ejercido) AS ejercido
+    FROM semantica.gasto
+    WHERE ejercicio = 2023
+      AND ramo_clave = 36
+      AND unidad_responsable_clave = 'H00'
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+  notas: La Guardia Nacional es la unidad H00 del ramo 36, Seguridad y Protección Ciudadana.
+
+- id: P0044
+  pregunta: ¿Cuánto se pagó en 2024 a través de la Pensión para el Bienestar de las Personas Adultas Mayores?
+  ruta: sql
+  comportamiento: responder
+  origen:
+    tipo: generada_ia
+    referencia: 'matriz de cobertura, lote G1: programática / total'
+  sql: |
+    SELECT sum(pagado) AS pagado
+    FROM semantica.gasto
+    WHERE ejercicio = 2024
+      AND ramo_clave = 20
+      AND programa_clave = 'S176'
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+
+- id: P0045
+  pregunta: ¿Cuánto se ejerció en el programa Sembrando Vida en cada año de 2020 a 2025?
+  ruta: sql
+  comportamiento: responder
+  origen:
+    tipo: generada_ia
+    referencia: 'matriz de cobertura, lote G1: programática / comparación entre ejercicios'
+  sql: |
+    SELECT ejercicio, sum(ejercido) AS ejercido
+    FROM semantica.gasto
+    WHERE ramo_clave = 20
+      AND programa = 'Sembrando Vida'
+    GROUP BY ejercicio
+    ORDER BY ejercicio
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+  notas: 'Trampa del esquema: el programa tiene dos claves, S287 y U010, que coexisten en 2020. Filtrar por una sola clave omite 4,269.5 millones de ese año; el SQL filtra por nombre.'
+
+- id: P0046
+  pregunta: ¿Cuáles fueron los cinco programas presupuestarios con más presupuesto aprobado en 2025?
+  ruta: sql
+  comportamiento: responder
+  origen:
+    tipo: generada_ia
+    referencia: 'matriz de cobertura, lote G1: programática / los mayores'
+  sql: |
+    SELECT ramo, programa_clave, programa, sum(aprobado) AS aprobado
+    FROM semantica.gasto
+    WHERE ejercicio = 2025
+    GROUP BY ramo, programa_clave, programa
+    ORDER BY aprobado DESC
+    LIMIT 5
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+  notas: 'Trampa del esquema: la clave de programa no es única entre ramos. Agrupar solo por clave sumaría programas distintos; el SQL agrupa por ramo, clave y nombre.'
+
+- id: P0047
+  pregunta: ¿Cuánto ejerció el IMSS en servicios personales en 2024?
+  ruta: sql
+  comportamiento: responder
+  origen:
+    tipo: generada_ia
+    referencia: 'matriz de cobertura, lote G1: objeto del gasto / total (capítulo)'
+  sql: |
+    SELECT sum(ejercido) AS ejercido
+    FROM semantica.gasto
+    WHERE ejercicio = 2024
+      AND ramo_clave = 50
+      AND capitulo_clave = 1000
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+  notas: Servicios personales es el capítulo 1000 del Clasificador por Objeto del Gasto.
+
+- id: P0048
+  pregunta: ¿En qué capítulo de gasto se devengó más dinero en 2024?
+  ruta: sql
+  comportamiento: responder
+  origen:
+    tipo: generada_ia
+    referencia: 'matriz de cobertura, lote G1: objeto del gasto / los mayores'
+  sql: |
+    SELECT capitulo, sum(devengado) AS devengado
+    FROM semantica.gasto
+    WHERE ejercicio = 2024
+    GROUP BY capitulo
+    ORDER BY devengado DESC
+    LIMIT 1
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+
+- id: P0049
+  pregunta: ¿Cuánto devengó el gobierno federal en medicinas y productos farmacéuticos durante 2023?
+  ruta: sql
+  comportamiento: responder
+  origen:
+    tipo: generada_ia
+    referencia: 'matriz de cobertura, lote G1: objeto del gasto / total (partida)'
+  sql: |
+    SELECT sum(devengado) AS devengado
+    FROM semantica.gasto
+    WHERE ejercicio = 2023
+      AND partida_clave = 25301
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+  notas: Partida 25301, la única del clasificador para medicinas.
+
+- id: P0050
+  pregunta: ¿Cuánto gasto federal se pagó con destino a Tamaulipas en 2025?
+  ruta: sql
+  comportamiento: responder
+  origen:
+    tipo: generada_ia
+    referencia: 'matriz de cobertura, lote G1: geográfica / total (caso local)'
+  sql: |
+    SELECT sum(pagado) AS pagado
+    FROM semantica.gasto
+    WHERE ejercicio = 2025
+      AND entidad_federativa = 'Tamaulipas'
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+  notas: 'Solo cuenta el gasto con destino geográfico asignado: una parte importante del gasto federal se clasifica como no distribuible geográficamente.'
+
+- id: P0051
+  pregunta: ¿Cuánto recibió Tamaulipas en 2024 de cada fondo de aportaciones federales del ramo 33, en montos pagados?
+  ruta: sql
+  comportamiento: responder
+  origen:
+    tipo: generada_ia
+    referencia: 'matriz de cobertura, lote G1: geográfica + programática / desglose (caso local)'
+  sql: |
+    SELECT programa_clave, programa, sum(pagado) AS pagado
+    FROM semantica.gasto
+    WHERE ejercicio = 2024
+      AND ramo_clave = 33
+      AND entidad_federativa = 'Tamaulipas'
+    GROUP BY programa_clave, programa
+    ORDER BY programa_clave
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+  notas: Los fondos de aportaciones son los programas del ramo 33; la base los nombra por sigla (FASSA, FONE, FAM...).
+
+- id: P0052
+  pregunta: ¿Cuánto le pagó la Federación a Tamaulipas por participaciones en cada año de 2020 a 2025?
+  ruta: sql
+  comportamiento: responder
+  origen:
+    tipo: generada_ia
+    referencia: 'matriz de cobertura, lote G1: geográfica / comparación entre ejercicios (caso local)'
+  sql: |
+    SELECT ejercicio, sum(pagado) AS pagado
+    FROM semantica.gasto
+    WHERE ramo_clave = 28
+      AND entidad_federativa = 'Tamaulipas'
+    GROUP BY ejercicio
+    ORDER BY ejercicio
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+  notas: Las participaciones son el ramo 28.
+
+- id: P0053
+  pregunta: ¿Cuáles fueron las tres entidades federativas con mayor gasto federal devengado en 2024?
+  ruta: sql
+  comportamiento: responder
+  origen:
+    tipo: generada_ia
+    referencia: 'matriz de cobertura, lote G1: geográfica / los mayores'
+  sql: |
+    SELECT entidad_federativa, sum(devengado) AS devengado
+    FROM semantica.gasto
+    WHERE ejercicio = 2024
+      AND entidad_federativa NOT IN ('En El Extranjero', 'No Distribuible Geográficamente')
+    GROUP BY entidad_federativa
+    ORDER BY devengado DESC
+    LIMIT 3
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+  notas: 'Trampa del esquema: la dimensión geográfica incluye ''En El Extranjero'' y ''No Distribuible Geográficamente'', que no son entidades federativas y encabezarían la lista si no se excluyen. Nota para la verificación: la Ciudad de México encabeza con cerca del 40% del gasto devengado por el efecto sede; la clasificación geográfica le asigna buena parte del gasto de las dependencias con oficinas centrales en ella, no necesariamente donde se recibe el beneficio.'
+
+- id: P0054
+  pregunta: ¿Cuál fue el presupuesto aprobado para la función Educación de la clasificación funcional en 2025?
+  ruta: sql
+  comportamiento: responder
+  origen:
+    tipo: generada_ia
+    referencia: 'matriz de cobertura, lote G1: funcional / total'
+  sql: |
+    SELECT sum(aprobado) AS aprobado
+    FROM semantica.gasto
+    WHERE ejercicio = 2025
+      AND funcion = 'Educación'
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+  notas: 'La pregunta nombra la clasificación funcional para distinguirla del ramo 11, Educación Pública: son cifras distintas.'
+
+- id: P0055
+  pregunta: ¿Cómo se repartió el gasto devengado de 2024 entre las finalidades de la clasificación funcional?
+  ruta: sql
+  comportamiento: responder
+  origen:
+    tipo: generada_ia
+    referencia: 'matriz de cobertura, lote G1: funcional / desglose'
+  sql: |
+    SELECT finalidad, sum(devengado) AS devengado
+    FROM semantica.gasto
+    WHERE ejercicio = 2024
+    GROUP BY finalidad
+    ORDER BY devengado DESC
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+
+- id: P0056
+  pregunta: ¿Cuál fue el subejercicio de la Secretaría de Marina en 2024?
+  ruta: sql
+  comportamiento: responder
+  origen:
+    tipo: generada_ia
+    referencia: 'matriz de cobertura, lote G1: administrativa / diferencia entre etapas'
+  sql: |
+    SELECT sum(modificado) - sum(devengado) AS subejercicio
+    FROM semantica.gasto
+    WHERE ejercicio = 2024
+      AND ramo_clave = 13
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+  notas: 'Subejercicio como modificado menos devengado, la definición verificada en la Cuenta Pública. Nota para la verificación: el resultado es 0.00 y es correcto. En 2024, 32 de los 44 ramos que no son entidades de control directo ni empresas tienen subejercicio cero, porque al cierre el modificado se ajusta al devengado. La definición común entre el público, aprobado menos devengado, daría una cifra distinta: la pregunta pone a prueba si el sistema usa la definición de la Cuenta Pública.'
+
+- id: P0057
+  pregunta: En 2023, ¿cuánto más o cuánto menos ejerció la Secretaría de Energía en comparación con su presupuesto aprobado?
+  ruta: sql
+  comportamiento: responder
+  origen:
+    tipo: generada_ia
+    referencia: 'matriz de cobertura, lote G1: administrativa / diferencia entre etapas'
+  sql: |
+    SELECT sum(ejercido) - sum(aprobado) AS diferencia
+    FROM semantica.gasto
+    WHERE ejercicio = 2023
+      AND ramo_clave = 18
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+  notas: Un resultado positivo indica que se ejerció más de lo aprobado.
+
+- id: P0058
+  pregunta: ¿Qué porcentaje del gasto devengado en 2024 correspondió a pensiones y jubilaciones?
+  ruta: sql
+  comportamiento: responder
+  origen:
+    tipo: generada_ia
+    referencia: 'matriz de cobertura, lote G1: económica / proporción'
+  sql: |
+    SELECT 100 * sum(CASE WHEN tipo_de_gasto = 'Pensiones y jubilaciones' THEN devengado ELSE 0 END)
+               / sum(devengado) AS porcentaje
+    FROM semantica.gasto
+    WHERE ejercicio = 2024
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+  notas: Pensiones y jubilaciones es el tipo de gasto 4.
+
+- id: P0059
+  pregunta: ¿En qué porcentaje cambió el presupuesto aprobado de la Secretaría de Salud entre 2020 y 2025?
+  ruta: sql
+  comportamiento: responder
+  origen:
+    tipo: generada_ia
+    referencia: 'matriz de cobertura, lote G1: administrativa / comparación entre ejercicios (proporción)'
+  sql: |
+    SELECT 100 * (sum(CASE WHEN ejercicio = 2025 THEN aprobado END)
+                / sum(CASE WHEN ejercicio = 2020 THEN aprobado END) - 1) AS cambio_porcentual
+    FROM semantica.gasto
+    WHERE ramo_clave = 12
+      AND ejercicio IN (2020, 2025)
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+  notas: 'Cambio porcentual del ramo 12. En términos nominales: no descuenta la inflación. Nota para la verificación: la caída de 48% es consistente con el traslado de servicios de salud a IMSS-Bienestar, que aparece en el ramo 47 Entidades no Sectorizadas (165 mil millones en la función Salud en 2025, ver P0012). La cifra responde a la pregunta sobre el ramo 12, pero no mide la evolución del gasto en salud.'
+
+- id: P0060
+  pregunta: ¿Cuántos programas presupuestarios distintos tuvo la Secretaría de Bienestar en 2025?
+  ruta: sql
+  comportamiento: responder
+  origen:
+    tipo: generada_ia
+    referencia: 'matriz de cobertura, lote G1: programática / total (conteo)'
+  sql: |
+    SELECT count(DISTINCT programa_clave) AS programas
+    FROM semantica.gasto
+    WHERE ejercicio = 2025
+      AND ramo_clave = 20
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+  notas: Dentro de un mismo ramo la clave de programa sí es única.
+
+- id: P0061
+  pregunta: ¿Qué unidad responsable de la Secretaría de Educación Pública tuvo el mayor gasto devengado en 2023?
+  ruta: sql
+  comportamiento: responder
+  origen:
+    tipo: generada_ia
+    referencia: 'matriz de cobertura, lote G1: administrativa / los mayores (unidad responsable)'
+  sql: |
+    SELECT unidad_responsable, sum(devengado) AS devengado
+    FROM semantica.gasto
+    WHERE ejercicio = 2023
+      AND ramo_clave = 11
+    GROUP BY unidad_responsable
+    ORDER BY devengado DESC
+    LIMIT 1
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'

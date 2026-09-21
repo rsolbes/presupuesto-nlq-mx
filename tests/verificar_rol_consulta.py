@@ -8,8 +8,8 @@ razon distinta a la esperada cuenta como fallida: el error tiene que ser el
 correcto, no cualquier error.
 
 Distingue las dos clases de proteccion:
-  barrera   la sesion no puede quitarla (privilegios, confinamiento a la base)
-  barandal  la sesion puede cambiarla (solo lectura, tiempo limite)
+  barrera      la sesion no puede quitarla (privilegios, confinamiento a la base)
+  salvaguarda  la sesion puede cambiarla (solo lectura, tiempo limite)
 
 Cada prueba abre su propia conexion, para que un error no deje abortada la
 transaccion de las siguientes.
@@ -50,23 +50,23 @@ PRUEBAS = [
      "las tablas base solo son alcanzables a traves de vistas"),
     ("no escribe aun sin solo lectura", "barrera",
      ["BEGIN READ WRITE", "CREATE TABLE semantica.prueba (x int)"], None, ("sqlstate", "42501"),
-     "los privilegios detienen la escritura aunque se desactive el barandal"),
+     "los privilegios detienen la escritura aunque se desactive la salvaguarda"),
     ("no crea tablas temporales", "barrera",
      ["BEGIN READ WRITE", "CREATE TEMP TABLE prueba_tmp (x int)"], None, ("sqlstate", "42501"),
      "sin permiso TEMPORARY sobre la base"),
     ("confinado a su base", "barrera",
      ["SELECT 1"], "postgres", ("rechazo", None),
      "no puede conectarse a otras bases del servidor"),
-    ("solo lectura por defecto", "barandal",
+    ("solo lectura por defecto", "salvaguarda",
      ["SHOW default_transaction_read_only"], None, ("valor", "on"),
      "toda transaccion inicia en solo lectura"),
-    ("escritura bloqueada por defecto", "barandal",
+    ("escritura bloqueada por defecto", "salvaguarda",
      ["CREATE TABLE semantica.prueba (x int)"], None, ("sqlstate", "25006"),
-     "el barandal detiene la escritura antes que los privilegios"),
-    ("tiempo limite configurado", "barandal",
+     "la salvaguarda detiene la escritura antes que los privilegios"),
+    ("tiempo limite configurado", "salvaguarda",
      ["SHOW statement_timeout"], None, ("valor", "15s"),
      "limite por sentencia"),
-    ("tiempo limite efectivo", "barandal",
+    ("tiempo limite efectivo", "salvaguarda",
      ["SELECT pg_sleep(20)"], None, ("sqlstate", "57014"),
      "una sentencia de 20 s se cancela a los 15 s"),
 ]
@@ -157,7 +157,7 @@ def main():
         obtenido = correr(sentencias, base)
         paso = evaluar(esperado, obtenido)
         resultados.append((nombre, tipo, esperado, obtenido, paso, demuestra))
-        print("  {:<4} {:<10} {}".format("OK" if paso else "FALLA", tipo, nombre), flush=True)
+        print("  {:<4} {:<12} {}".format("OK" if paso else "FALLA", tipo, nombre), flush=True)
         if not paso and not obtenido[0]:
             print("       " + obtenido[2], flush=True)
 
@@ -182,7 +182,7 @@ def escribir_informe(resultados):
              "cuenta como fallida.")
     L.append("")
     L.append("Una **barrera** no puede quitarla la propia sesion (privilegios, "
-             "confinamiento a la base). Un **barandal** si puede cambiarse desde la "
+             "confinamiento a la base). Una **salvaguarda** si puede cambiarse desde la "
              "sesion (`SET`, `BEGIN READ WRITE`, `set_config`), por lo que evita "
              "accidentes pero no es frontera de seguridad: la capa de orquestacion "
              "debe imponer su propio tiempo limite y rechazar `SET` y `set_config`.")

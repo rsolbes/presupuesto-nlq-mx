@@ -2,11 +2,15 @@
 
 Preguntas en español sobre el gasto público federal, con su respuesta de referencia verificada. Es el instrumento con el que se mide la exactitud del sistema: cada configuración experimental responde las mismas preguntas y su resultado se compara contra la referencia.
 
-## Regla fundamental: las preguntas no las redacta un modelo de lenguaje
+## Dos orígenes de preguntas
 
-Un modelo tiende a formular las preguntas del modo en que a un modelo le resulta fácil interpretarlas. Un conjunto así mediría la capacidad del sistema de entender preguntas redactadas por sus semejantes, no las que haría una persona, y los resultados de exactitud quedarían sesgados al alza.
+Un modelo de lenguaje tiende a formular las preguntas del modo en que a un modelo le resulta fácil interpretarlas. Un conjunto redactado por un modelo mide la capacidad del sistema de entender preguntas escritas por sus semejantes, y sus resultados de exactitud tienden a quedar sesgados al alza. El conjunto combina por eso dos orígenes, que se analizan por separado.
 
-Por eso las preguntas provienen de **solicitudes de información reales**, en las palabras literales del ciudadano que las escribió. Cuando la pregunta viene rodeada de fórmulas legales o combinada con otras, se recorta el fragmento pertinente, pero no se reescribe ni se parafrasea. El texto completo de la solicitud queda disponible por su folio.
+**Preguntas ciudadanas** (`solicitud_pnt`). Provienen de solicitudes de información reales, en las palabras literales del ciudadano. Cuando la pregunta viene rodeada de fórmulas legales o combinada con otras, se recorta el fragmento pertinente, pero no se reescribe. El texto completo queda disponible por su folio, y el validador comprueba que cada pregunta sea un fragmento literal.
+
+**Preguntas generadas** (`generada_ia`). Las solicitudes resultaron mayoritariamente no respondibles con los datos del proyecto: en los tres primeros lotes, el 78% pedía información que la base no contiene — detalle municipal, fideicomisos, ingresos, gastos a nivel de artículo o evento. Hacerlas respondibles exigía incorporar conjuntos de datos que exceden el alcance. Las preguntas respondibles se generan entonces con asistencia de un modelo de lenguaje, siguiendo una matriz de cobertura del esquema, y se verifican manualmente como las demás.
+
+**Consecuencia para el análisis.** La exactitud se reporta por separado para cada origen. Si el sistema acierta sistemáticamente más en las preguntas generadas que en las ciudadanas, esa diferencia es una medida del sesgo de las primeras. Además, el modelo que genera las preguntas no debe ser el único evaluado: si se evalúan modelos de la misma familia que el generador, el sesgo se maximiza.
 
 ## Proceso y distribución de responsabilidades
 
@@ -58,8 +62,8 @@ Las preguntas viven en `preguntas.yaml`, una lista de entradas con estos campos:
 | `pregunta` | siempre | El texto tal como se formuló en la fuente, o tal como se redactó la variante. |
 | `ruta` | siempre | `sql` o `documental`. La ruta a la que corresponde la pregunta, aunque no sea respondible. |
 | `comportamiento` | siempre | `responder`, `ambigua` o `abstenerse`. Ver la sección siguiente. |
-| `origen.tipo` | siempre | `solicitud_pnt`, `nota_periodistica`, `reporte_oficial`, `variante` u `otro`. |
-| `origen.referencia` | siempre | Folio, URL, documento o `id` de la pregunta original. |
+| `origen.tipo` | siempre | `solicitud_pnt`, `generada_ia`, `nota_periodistica`, `reporte_oficial`, `variante` u `otro`. |
+| `origen.referencia` | siempre | Folio, URL, documento, `id` de la pregunta original, o la celda de la matriz de cobertura. |
 | `sql` | si es `responder` en ruta `sql` | Consulta de referencia sobre el esquema `semantica`. |
 | `interpretaciones` | si es `ambigua` | Al menos dos, cada una con `supuesto` y `sql`. |
 | `motivo` | si es `abstenerse` | Por qué la información disponible no permite responder. |
@@ -79,6 +83,22 @@ El sistema no siempre debe devolver un número. Cada pregunta declara qué respu
 **`ambigua`.** Admite más de una interpretación con respuestas distintas. El caso típico es la etapa del gasto: "cuánto se gastó" puede referirse al aprobado, al devengado o al pagado, y para 2025 la diferencia entre devengado y pagado supera los 185 mil millones de pesos. El comportamiento correcto es advertir la ambigüedad, o responder declarando explícitamente el supuesto. Cada interpretación lleva su propio SQL.
 
 **`abstenerse`.** La información disponible no permite responder: un ejercicio que no está en la base, una dependencia que no existía ese año, un nivel de detalle que los datos no tienen, una pregunta sobre gasto municipal. El comportamiento correcto es reconocerlo en lugar de inventar una respuesta. Estas preguntas miden la capacidad de abstención, que es la quinta pregunta de investigación.
+
+## Matriz de cobertura de las preguntas generadas
+
+Las preguntas generadas no se eligen a criterio: recorren sistemáticamente las cinco clasificaciones del gasto y las operaciones que una consulta puede requerir. Cada pregunta registra su celda en `origen.referencia`.
+
+**Clasificaciones:** administrativa (ramo, unidad responsable), programática (programa presupuestario), por objeto del gasto (capítulo, partida), funcional (finalidad, función) y geográfica (entidad federativa).
+
+**Operaciones:** total, desglose, los mayores, comparación entre ejercicios, proporción y diferencia entre etapas del gasto.
+
+Tres criterios adicionales:
+
+- **Toda pregunta generada es respondible sin ambigüedad**: nombra la etapa del gasto, el ejercicio y el sujeto. Las ambiguas y las no respondibles provienen de las solicitudes ciudadanas.
+- **Se incluyen deliberadamente las trampas del esquema** que la exploración de los datos reveló: claves de programa que no son únicas entre ramos, programas con más de una clave en el mismo ejercicio, entidades geográficas que no son entidades federativas, y la diferencia entre la clasificación administrativa y la funcional.
+- **El caso local de Tamaulipas** tiene presencia explícita en la clasificación geográfica.
+
+Las preguntas se redactan en un registro natural, pero no imitan rasgos de la escritura ciudadana como las erratas: fingirlos presentaría como humano algo que no lo es.
 
 ## Criterios de lectura
 

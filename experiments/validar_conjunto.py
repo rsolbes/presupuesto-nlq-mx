@@ -44,7 +44,8 @@ ENV = RAIZ / ".env"
 RUTAS = {"sql", "documental"}
 COMPORTAMIENTOS = {"responder", "ambigua", "abstenerse"}
 ESTADOS = {"propuesta", "verificada", "descartada"}
-TIPOS_ORIGEN = {"solicitud_pnt", "nota_periodistica", "reporte_oficial", "variante", "otro"}
+TIPOS_ORIGEN = {"solicitud_pnt", "generada_ia", "nota_periodistica", "reporte_oficial",
+                "variante", "otro"}
 ESQUEMA_PERMITIDO = "semantica"
 MAX_FILAS_AVISO = 1000
 

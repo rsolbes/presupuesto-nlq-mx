@@ -1,5 +1,5 @@
 {
- "generado": "2026-09-21T09:29:57",
+ "generado": "2026-09-21T09:58:05",
  "rol": "consulta_nlq",
  "preguntas": {
   "P0001": [
@@ -13,7 +13,7 @@
      ]
     ],
     "n_filas": 1,
-    "ms": 330,
+    "ms": 407,
     "huella_sql": "cecfd7fb62c1f83b",
     "supuesto": "Todas las partidas de combustible para vehículos (26101 a 26104), gobierno federal completo"
    },
@@ -27,7 +27,7 @@
      ]
     ],
     "n_filas": 1,
-    "ms": 123,
+    "ms": 115,
     "huella_sql": "4c64dad77d0c732d",
     "supuesto": "Solo combustible para vehículos de servicios administrativos y asignados a servidores públicos (26103 y 26104), gobierno federal completo"
    }
@@ -694,7 +694,7 @@
     ]
    ],
    "n_filas": 93,
-   "ms": 15,
+   "ms": 13,
    "huella_sql": "18ff4548dc41e860"
   },
   "P0007": [
@@ -742,7 +742,7 @@
      ]
     ],
     "n_filas": 7,
-    "ms": 50,
+    "ms": 58,
     "huella_sql": "12fe5e14c94f3634",
     "supuesto": "Programas clasificados en la subfunción Ordenación de Aguas Residuales, Drenaje y Alcantarillado, 2020 a 2025"
    },
@@ -765,7 +765,7 @@
      ]
     ],
     "n_filas": 2,
-    "ms": 1315,
+    "ms": 1635,
     "huella_sql": "f6703e91e15528a9",
     "supuesto": "Programas cuyo nombre menciona aguas residuales o saneamiento, 2020 a 2025"
    }
@@ -811,7 +811,7 @@
      ]
     ],
     "n_filas": 8,
-    "ms": 103,
+    "ms": 197,
     "huella_sql": "c00ed4391b8be819",
     "supuesto": "Clasificación funcional: función Salud, ejercicio más reciente (2025), presupuesto aprobado por ramo"
    },
@@ -944,7 +944,7 @@
      ]
     ],
     "n_filas": 24,
-    "ms": 62,
+    "ms": 99,
     "huella_sql": "98c5898b21ffae2e",
     "supuesto": "Clasificación administrativa: ramo 12 Salud, ejercicio más reciente (2025), presupuesto aprobado por programa"
    }
@@ -995,7 +995,7 @@
     ]
    ],
    "n_filas": 6,
-   "ms": 22,
+   "ms": 32,
    "huella_sql": "73a05697cba1ab94"
   },
   "P0023": [
@@ -1009,7 +1009,7 @@
      ]
     ],
     "n_filas": 1,
-    "ms": 101,
+    "ms": 149,
     "huella_sql": "05c36ea550b8f9c6",
     "supuesto": "Subsidios por objeto del gasto: partidas del concepto 4300, Subsidios y subvenciones"
    },
@@ -1023,7 +1023,7 @@
      ]
     ],
     "n_filas": 1,
-    "ms": 314,
+    "ms": 419,
     "huella_sql": "52b2d082bfea0323",
     "supuesto": "Subsidios por clasificación programática: programas de modalidad S (Sujetos a Reglas de Operación) y U (Otros Subsidios)"
    }
@@ -1045,7 +1045,7 @@
      ]
     ],
     "n_filas": 1,
-    "ms": 27,
+    "ms": 47,
     "huella_sql": "188c3be1c7e32755",
     "supuesto": "Ejercicio más reciente (2025), por programa"
    },
@@ -1088,7 +1088,7 @@
      ]
     ],
     "n_filas": 6,
-    "ms": 26,
+    "ms": 28,
     "huella_sql": "0735e5b9bf684400",
     "supuesto": "Todos los ejercicios disponibles (2020 a 2025), por ejercicio"
    }
@@ -1103,8 +1103,439 @@
     ]
    ],
    "n_filas": 1,
-   "ms": 19,
+   "ms": 18,
    "huella_sql": "bf206899cda38146"
+  },
+  "P0042": {
+   "columnas": [
+    "aprobado"
+   ],
+   "filas": [
+    [
+     "465871888417.00"
+    ]
+   ],
+   "n_filas": 1,
+   "ms": 54,
+   "huella_sql": "ae7ffb2248efedbc"
+  },
+  "P0043": {
+   "columnas": [
+    "ejercido"
+   ],
+   "filas": [
+    [
+     "24432593018.89"
+    ]
+   ],
+   "n_filas": 1,
+   "ms": 17,
+   "huella_sql": "88a088cd6d9958c1"
+  },
+  "P0044": {
+   "columnas": [
+    "pagado"
+   ],
+   "filas": [
+    [
+     "442459087372.15"
+    ]
+   ],
+   "n_filas": 1,
+   "ms": 41,
+   "huella_sql": "088f8baaa03a6c71"
+  },
+  "P0045": {
+   "columnas": [
+    "ejercicio",
+    "ejercido"
+   ],
+   "filas": [
+    [
+     2020,
+     "27307285988.60"
+    ],
+    [
+     2021,
+     "28152825039.00"
+    ],
+    [
+     2022,
+     "29634539976.00"
+    ],
+    [
+     2023,
+     "34372498102.28"
+    ],
+    [
+     2024,
+     "35220237189.39"
+    ],
+    [
+     2025,
+     "35396291343.03"
+    ]
+   ],
+   "n_filas": 6,
+   "ms": 98,
+   "huella_sql": "f0c92ee09a834d06"
+  },
+  "P0046": {
+   "columnas": [
+    "ramo",
+    "programa_clave",
+    "programa",
+    "aprobado"
+   ],
+   "filas": [
+    [
+     "Participaciones a Entidades Federativas y Municipios",
+     "C001",
+     "Fondo General de Participaciones",
+     "980334377725.00"
+    ],
+    [
+     "Deuda Pública",
+     "D001",
+     "Valores gubernamentales",
+     "967389552695.00"
+    ],
+    [
+     "Aportaciones a Seguridad Social",
+     "J008",
+     "Pensiones y Jubilaciones en curso de Pago",
+     "753202100919.00"
+    ],
+    [
+     "Instituto Mexicano del Seguro Social",
+     "J001",
+     "Pensiones en curso de pago Ley 1973",
+     "753202100919.00"
+    ],
+    [
+     "Bienestar",
+     "S176",
+     "Pensión para el Bienestar de las Personas Adultas Mayores",
+     "483427619205.00"
+    ]
+   ],
+   "n_filas": 5,
+   "ms": 1111,
+   "huella_sql": "f227900aa3254c6d"
+  },
+  "P0047": {
+   "columnas": [
+    "ejercido"
+   ],
+   "filas": [
+    [
+     "286844053115.00"
+    ]
+   ],
+   "n_filas": 1,
+   "ms": 34,
+   "huella_sql": "4f4fcbba113d0aed"
+  },
+  "P0048": {
+   "columnas": [
+    "capitulo",
+    "devengado"
+   ],
+   "filas": [
+    [
+     "Transferencias, asignaciones, subsidios y otras ayudas",
+     "3990314365721.56"
+    ]
+   ],
+   "n_filas": 1,
+   "ms": 431,
+   "huella_sql": "938ac98ee7dbf08a"
+  },
+  "P0049": {
+   "columnas": [
+    "devengado"
+   ],
+   "filas": [
+    [
+     "87420457107.46"
+    ]
+   ],
+   "n_filas": 1,
+   "ms": 119,
+   "huella_sql": "dac69ec2f4cbc303"
+  },
+  "P0050": {
+   "columnas": [
+    "pagado"
+   ],
+   "filas": [
+    [
+     "207999168851.10"
+    ]
+   ],
+   "n_filas": 1,
+   "ms": 282,
+   "huella_sql": "ead37855b982dcc1"
+  },
+  "P0051": {
+   "columnas": [
+    "programa_clave",
+    "programa",
+    "pagado"
+   ],
+   "filas": [
+    [
+     "I002",
+     "FASSA",
+     "2384252576.99"
+    ],
+    [
+     "I003",
+     "FAIS Entidades",
+     "188552255.00"
+    ],
+    [
+     "I004",
+     "FAIS Municipal y de las Demarcaciones Territoriales del Distrito Federal",
+     "1366970390.29"
+    ],
+    [
+     "I005",
+     "FORTAMUN",
+     "3189532198.21"
+    ],
+    [
+     "I006",
+     "FAM Asistencia Social",
+     "375742657.66"
+    ],
+    [
+     "I007",
+     "FAM Infraestructura Educativa Básica",
+     "337733878.00"
+    ],
+    [
+     "I008",
+     "FAM Infraestructura Educativa Media Superior y Superior",
+     "161031830.00"
+    ],
+    [
+     "I009",
+     "FAETA Educación Tecnológica",
+     "240928650.21"
+    ],
+    [
+     "I010",
+     "FAETA Educación de Adultos",
+     "100154946.09"
+    ],
+    [
+     "I011",
+     "FASP",
+     "273892265.80"
+    ],
+    [
+     "I012",
+     "FAFEF",
+     "1499200306.00"
+    ],
+    [
+     "I013",
+     "FONE Servicios Personales",
+     "17137874449.58"
+    ],
+    [
+     "I014",
+     "FONE Otros de Gasto Corriente",
+     "47880373.72"
+    ],
+    [
+     "I015",
+     "FONE Gasto de Operación",
+     "537219508.50"
+    ]
+   ],
+   "n_filas": 14,
+   "ms": 22,
+   "huella_sql": "533adbc4529ab04f"
+  },
+  "P0052": {
+   "columnas": [
+    "ejercicio",
+    "pagado"
+   ],
+   "filas": [
+    [
+     2020,
+     "26407036106.00"
+    ],
+    [
+     2021,
+     "28035036673.00"
+    ],
+    [
+     2022,
+     "31988553801.00"
+    ],
+    [
+     2023,
+     "34097795129.00"
+    ],
+    [
+     2024,
+     "37236941175.00"
+    ],
+    [
+     2025,
+     "39254508390.00"
+    ]
+   ],
+   "n_filas": 6,
+   "ms": 19,
+   "huella_sql": "0eb4486ea8e17be3"
+  },
+  "P0053": {
+   "columnas": [
+    "entidad_federativa",
+    "devengado"
+   ],
+   "filas": [
+    [
+     "Ciudad de México",
+     "4191070310435.03"
+    ],
+    [
+     "Estado de México",
+     "507924041043.88"
+    ],
+    [
+     "Veracruz",
+     "378283099187.93"
+    ]
+   ],
+   "n_filas": 3,
+   "ms": 397,
+   "huella_sql": "e4d277db57bb4dcd"
+  },
+  "P0054": {
+   "columnas": [
+    "aprobado"
+   ],
+   "filas": [
+    [
+     "1084590853205.00"
+    ]
+   ],
+   "n_filas": 1,
+   "ms": 62,
+   "huella_sql": "972715815586ff99"
+  },
+  "P0055": {
+   "columnas": [
+    "finalidad",
+    "devengado"
+   ],
+   "filas": [
+    [
+     "Desarrollo Social",
+     "5552493575492.18"
+    ],
+    [
+     "Otras no Clasificadas en Funciones Anteriores",
+     "2355063347366.07"
+    ],
+    [
+     "Desarrollo Económico",
+     "1986074871713.24"
+    ],
+    [
+     "Gobierno",
+     "661635473018.50"
+    ]
+   ],
+   "n_filas": 4,
+   "ms": 266,
+   "huella_sql": "b7e2da6d8878be77"
+  },
+  "P0056": {
+   "columnas": [
+    "subejercicio"
+   ],
+   "filas": [
+    [
+     "0.00"
+    ]
+   ],
+   "n_filas": 1,
+   "ms": 69,
+   "huella_sql": "8af462522ffbf9fd"
+  },
+  "P0057": {
+   "columnas": [
+    "diferencia"
+   ],
+   "filas": [
+    [
+     "130003505593.79"
+    ]
+   ],
+   "n_filas": 1,
+   "ms": 42,
+   "huella_sql": "6c43600eed330c1b"
+  },
+  "P0058": {
+   "columnas": [
+    "porcentaje"
+   ],
+   "filas": [
+    [
+     "23.1532913589703602"
+    ]
+   ],
+   "n_filas": 1,
+   "ms": 222,
+   "huella_sql": "20bd42949ce0a0f5"
+  },
+  "P0059": {
+   "columnas": [
+    "cambio_porcentual"
+   ],
+   "filas": [
+    [
+     "-48.23018876090224472300"
+    ]
+   ],
+   "n_filas": 1,
+   "ms": 89,
+   "huella_sql": "d41cdd601168ac45"
+  },
+  "P0060": {
+   "columnas": [
+    "programas"
+   ],
+   "filas": [
+    [
+     15
+    ]
+   ],
+   "n_filas": 1,
+   "ms": 44,
+   "huella_sql": "c462fbb7f29a95cf"
+  },
+  "P0061": {
+   "columnas": [
+    "unidad_responsable",
+    "devengado"
+   ],
+   "filas": [
+    [
+     "Coordinación Nacional de Becas para el Bienestar Benito Juárez",
+     "82307508877.56"
+    ]
+   ],
+   "n_filas": 1,
+   "ms": 105,
+   "huella_sql": "cc75bd3ad1fcc9cd"
   }
  }
 }

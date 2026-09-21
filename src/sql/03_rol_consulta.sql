@@ -15,7 +15,7 @@
 --
 -- Verificacion reproducible: tests/verificar_rol_consulta.py
 --
--- BARANDALES (evitan accidentes, pero la propia sesion puede cambiarlos con
+-- SALVAGUARDAS (evitan accidentes, pero la propia sesion puede cambiarlos con
 -- SET, BEGIN READ WRITE o set_config()):
 --   - Transacciones de solo lectura por defecto (SQLSTATE 25006 al escribir).
 --   - Tiempo limite de 15 segundos por sentencia.
@@ -23,7 +23,7 @@
 -- Consecuencia de diseno: la capa de orquestacion debe imponer su propio
 -- tiempo limite desde el cliente, y el validador de SQL debe rechazar SET y
 -- las llamadas a set_config(). La seguridad frente a escritura no depende de
--- los barandales: aun con el modo de solo lectura desactivado, los privilegios
+-- las salvaguardas: aun con el modo de solo lectura desactivado, los privilegios
 -- siguen rechazando cualquier escritura.
 --
 -- Por que funciona sin permisos sobre las tablas base: en PostgreSQL una vista
@@ -52,7 +52,7 @@ COMMENT ON ROLE consulta_nlq IS
     'Rol del sistema de consulta en lenguaje natural. Solo lectura, solo el '
     'esquema semantica.';
 
--- Barandales: valores por defecto de cada sesion del rol. La sesion puede
+-- Salvaguardas: valores por defecto de cada sesion del rol. La sesion puede
 -- cambiarlos; no son la barrera de seguridad (ver encabezado).
 ALTER ROLE consulta_nlq SET default_transaction_read_only = on;
 ALTER ROLE consulta_nlq SET statement_timeout = '15s';
