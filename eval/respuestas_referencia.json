@@ -1,0 +1,1002 @@
+{
+ "generado": "2026-09-18T12:18:10",
+ "rol": "consulta_nlq",
+ "preguntas": {
+  "P0001": [
+   {
+    "columnas": [
+     "ejercido"
+    ],
+    "filas": [
+     [
+      "10982837668.96"
+     ]
+    ],
+    "n_filas": 1,
+    "ms": 271,
+    "huella_sql": "cecfd7fb62c1f83b",
+    "supuesto": "Todas las partidas de combustible para vehículos (26101 a 26104), gobierno federal completo"
+   },
+   {
+    "columnas": [
+     "ejercido"
+    ],
+    "filas": [
+     [
+      "1050335517.79"
+     ]
+    ],
+    "n_filas": 1,
+    "ms": 107,
+    "huella_sql": "4c64dad77d0c732d",
+    "supuesto": "Solo combustible para vehículos de servicios administrativos y asignados a servidores públicos (26103 y 26104), gobierno federal completo"
+   }
+  ],
+  "P0006": {
+   "columnas": [
+    "partida_clave",
+    "partida",
+    "asignado",
+    "ejercido",
+    "subejercicio"
+   ],
+   "filas": [
+    [
+     11301,
+     "Sueldos base",
+     "133654308.00",
+     "138762870.59",
+     "0.00"
+    ],
+    [
+     12101,
+     "Honorarios",
+     "6312943.00",
+     "5788429.97",
+     "0.00"
+    ],
+    [
+     12201,
+     "Remuneraciones al personal eventual",
+     "113196671.00",
+     "113196671.00",
+     "0.00"
+    ],
+    [
+     13101,
+     "Prima quinquenal por años de servicios efectivos prestados",
+     "343620.00",
+     "2581200.55",
+     "0.00"
+    ],
+    [
+     13201,
+     "Primas de vacaciones y dominical",
+     "4200850.00",
+     "3728726.78",
+     "0.00"
+    ],
+    [
+     13202,
+     "Aguinaldo o gratificación de fin de año",
+     "16803402.00",
+     "38345099.35",
+     "0.00"
+    ],
+    [
+     14101,
+     "Aportaciones al ISSSTE",
+     "22785992.00",
+     "16958586.33",
+     "0.00"
+    ],
+    [
+     14105,
+     "Aportaciones al seguro de cesantía en edad avanzada y vejez",
+     "7774157.00",
+     "6895636.85",
+     "0.00"
+    ],
+    [
+     14201,
+     "Aportaciones al FOVISSSTE",
+     "8064935.00",
+     "8025684.11",
+     "0.00"
+    ],
+    [
+     14301,
+     "Aportaciones al Sistema de Ahorro para el Retiro",
+     "3225975.00",
+     "2974114.48",
+     "0.00"
+    ],
+    [
+     14302,
+     "Depósitos para el ahorro solidario",
+     "4458076.00",
+     "4577218.72",
+     "0.00"
+    ],
+    [
+     14401,
+     "Cuotas para el seguro de vida del personal civil",
+     "3768338.00",
+     "3964655.43",
+     "0.00"
+    ],
+    [
+     14405,
+     "Cuotas para el seguro colectivo de retiro",
+     "524518.00",
+     "276633.00",
+     "0.00"
+    ],
+    [
+     15401,
+     "Prestaciones establecidas por condiciones generales de trabajo o contratos colectivos de trabajo",
+     "60019854.00",
+     "53347958.50",
+     "0.00"
+    ],
+    [
+     15402,
+     "Compensación garantizada",
+     "96122361.00",
+     "102881086.73",
+     "0.00"
+    ],
+    [
+     15403,
+     "Asignaciones adicionales al sueldo",
+     "84815461.00",
+     "88347417.50",
+     "0.00"
+    ],
+    [
+     15901,
+     "Otras prestaciones",
+     "15467700.00",
+     "19464137.35",
+     "0.00"
+    ],
+    [
+     17102,
+     "Estímulos al personal operativo",
+     "15268445.00",
+     "17020583.39",
+     "0.00"
+    ],
+    [
+     21101,
+     "Materiales y útiles de oficina",
+     "3144878.00",
+     "1866146.20",
+     "0.00"
+    ],
+    [
+     21201,
+     "Materiales y útiles de impresión y reproducción",
+     "611861.00",
+     "367464.34",
+     "0.00"
+    ],
+    [
+     21401,
+     "Materiales y útiles consumibles para el procesamiento en equipos y bienes informáticos",
+     "382757.00",
+     "25130.00",
+     "0.00"
+    ],
+    [
+     21501,
+     "Material de apoyo informativo",
+     "48243010.00",
+     "15678362.50",
+     "0.00"
+    ],
+    [
+     21601,
+     "Material de limpieza",
+     "3500000.00",
+     "26582085.78",
+     "0.00"
+    ],
+    [
+     21701,
+     "Materiales y suministros para planteles educativos",
+     "413500000.00",
+     "462184978.31",
+     "0.00"
+    ],
+    [
+     22104,
+     "Productos alimenticios para el personal en las instalaciones de las dependencias y entidades",
+     "943043.00",
+     "715613.08",
+     "0.00"
+    ],
+    [
+     22106,
+     "Productos alimenticios para el personal derivado de actividades extraordinarias",
+     "43943.00",
+     "37253.71",
+     "0.00"
+    ],
+    [
+     22301,
+     "Utensilios para el servicio de alimentación",
+     "22500.00",
+     "17277.01",
+     "0.00"
+    ],
+    [
+     24201,
+     "Cemento y productos de concreto",
+     "0.00",
+     "74999.99",
+     "0.00"
+    ],
+    [
+     24301,
+     "Cal, yeso y productos de yeso",
+     "5000.00",
+     "45209.93",
+     "0.00"
+    ],
+    [
+     24401,
+     "Madera y productos de madera",
+     "87000.00",
+     "37212.96",
+     "0.00"
+    ],
+    [
+     24501,
+     "Vidrio y productos de vidrio",
+     "441534.00",
+     "553772.25",
+     "0.00"
+    ],
+    [
+     24601,
+     "Material eléctrico y electrónico",
+     "1465919.00",
+     "1486528.28",
+     "0.00"
+    ],
+    [
+     24701,
+     "Artículos metálicos para la construcción",
+     "722097.00",
+     "1122053.48",
+     "0.00"
+    ],
+    [
+     24801,
+     "Materiales complementarios",
+     "1001809.00",
+     "1334311.98",
+     "0.00"
+    ],
+    [
+     24901,
+     "Otros materiales y artículos de construcción y reparación",
+     "1695472.00",
+     "1995579.28",
+     "0.00"
+    ],
+    [
+     25201,
+     "Plaguicidas, abonos y fertilizantes",
+     "254736.00",
+     "244904.83",
+     "0.00"
+    ],
+    [
+     25301,
+     "Medicinas y productos farmacéuticos",
+     "383261.00",
+     "235276.15",
+     "0.00"
+    ],
+    [
+     25401,
+     "Materiales, accesorios y suministros médicos",
+     "179887.00",
+     "157087.03",
+     "0.00"
+    ],
+    [
+     26102,
+     "Combustibles, lubricantes y aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales destinados a servicios públicos y la operación de programas públicos",
+     "15154663.00",
+     "12572960.47",
+     "0.00"
+    ],
+    [
+     26103,
+     "Combustibles, lubricantes y aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales destinados a servicios administrativos",
+     "11122.00",
+     "10845.80",
+     "0.00"
+    ],
+    [
+     27101,
+     "Vestuario y uniformes",
+     "59590000.00",
+     "59520130.93",
+     "0.00"
+    ],
+    [
+     27201,
+     "Prendas de protección personal",
+     "1346700.00",
+     "1100000.00",
+     "0.00"
+    ],
+    [
+     29101,
+     "Herramientas menores",
+     "1371226.00",
+     "1029026.03",
+     "0.00"
+    ],
+    [
+     29201,
+     "Refacciones y accesorios menores de edificios",
+     "676683.00",
+     "596130.52",
+     "0.00"
+    ],
+    [
+     29301,
+     "Refacciones y accesorios menores de mobiliario y equipo de administración, educacional y recreativo",
+     "607354.00",
+     "460342.18",
+     "0.00"
+    ],
+    [
+     29401,
+     "Refacciones y accesorios para equipo de cómputo y telecomunicaciones",
+     "7655439.00",
+     "1810697.45",
+     "0.00"
+    ],
+    [
+     29601,
+     "Refacciones y accesorios menores de equipo de transporte",
+     "2500000.00",
+     "2581802.41",
+     "0.00"
+    ],
+    [
+     31101,
+     "Servicio de energía eléctrica",
+     "5388719.00",
+     "5029507.00",
+     "0.00"
+    ],
+    [
+     31301,
+     "Servicio de agua",
+     "1067843.00",
+     "1064384.00",
+     "0.00"
+    ],
+    [
+     31401,
+     "Servicio telefónico convencional",
+     "4874161.00",
+     "3890508.86",
+     "0.00"
+    ],
+    [
+     31501,
+     "Servicio de telefonía celular",
+     "10855.00",
+     "9341.79",
+     "0.00"
+    ],
+    [
+     31603,
+     "Servicios de Internet",
+     "527094.00",
+     "308928.00",
+     "0.00"
+    ],
+    [
+     31801,
+     "Servicio postal",
+     "1430000.00",
+     "482167.62",
+     "0.00"
+    ],
+    [
+     31902,
+     "Contratación de otros servicios",
+     "347331.00",
+     "201144.00",
+     "0.00"
+    ],
+    [
+     32201,
+     "Arrendamiento de edificios y locales",
+     "22310981.00",
+     "20008096.27",
+     "0.00"
+    ],
+    [
+     32301,
+     "Arrendamiento de equipo y bienes informáticos",
+     "94812.00",
+     "47409.80",
+     "0.00"
+    ],
+    [
+     32302,
+     "Arrendamiento de mobiliario",
+     "2811.00",
+     "0.00",
+     "0.00"
+    ],
+    [
+     32701,
+     "Patentes, derechos de autor, regalías y otros",
+     "10183100.00",
+     "4159638.06",
+     "0.00"
+    ],
+    [
+     33104,
+     "Otras asesorías para la operación de programas",
+     "7000000.00",
+     "4171424.97",
+     "0.00"
+    ],
+    [
+     33105,
+     "Servicios relacionados con procedimientos jurisdiccionales",
+     "330000.00",
+     "35947.84",
+     "0.00"
+    ],
+    [
+     33301,
+     "Servicios de desarrollo de aplicaciones informáticas",
+     "66310498.00",
+     "24616190.40",
+     "0.00"
+    ],
+    [
+     33401,
+     "Servicios para capacitación a servidores públicos",
+     "2720000.00",
+     "1035044.80",
+     "0.00"
+    ],
+    [
+     33601,
+     "Servicios relacionados con traducciones",
+     "115000.00",
+     "52200.00",
+     "0.00"
+    ],
+    [
+     33602,
+     "Otros servicios comerciales",
+     "177528.00",
+     "3522.85",
+     "0.00"
+    ],
+    [
+     33603,
+     "Impresiones de documentos oficiales para la prestación de servicios públicos, identificación, formatos administrativos y fiscales, formas valoradas, certificados y títulos",
+     "550000.00",
+     "32100.00",
+     "0.00"
+    ],
+    [
+     33604,
+     "Impresión y elaboración de material informativo derivado de la operación y administración de las dependencias y entidades",
+     "44427476.00",
+     "40138666.68",
+     "0.00"
+    ],
+    [
+     33605,
+     "Información en medios masivos derivada de la operación y administración de las dependencias y entidades",
+     "550000.00",
+     "98696.00",
+     "0.00"
+    ],
+    [
+     33606,
+     "Servicios de digitalización",
+     "100000.00",
+     "0.00",
+     "0.00"
+    ],
+    [
+     33801,
+     "Servicios de vigilancia",
+     "34100000.00",
+     "44542285.76",
+     "0.00"
+    ],
+    [
+     33903,
+     "Servicios integrales",
+     "5000000.00",
+     "2986360.32",
+     "0.00"
+    ],
+    [
+     34101,
+     "Servicios bancarios y financieros",
+     "1000000.00",
+     "742000.00",
+     "0.00"
+    ],
+    [
+     34501,
+     "Seguros de bienes patrimoniales",
+     "23400000.00",
+     "19882045.12",
+     "0.00"
+    ],
+    [
+     34701,
+     "Fletes y maniobras",
+     "46008442.00",
+     "36746403.72",
+     "0.00"
+    ],
+    [
+     35101,
+     "Mantenimiento y conservación de inmuebles para la prestación de servicios administrativos",
+     "2720986.00",
+     "2720986.00",
+     "0.00"
+    ],
+    [
+     35201,
+     "Mantenimiento y conservación de mobiliario y equipo de administración",
+     "282307.00",
+     "168531.81",
+     "0.00"
+    ],
+    [
+     35301,
+     "Mantenimiento y conservación de bienes informáticos",
+     "10029497.00",
+     "154250.42",
+     "0.00"
+    ],
+    [
+     35501,
+     "Mantenimiento y conservación de vehículos terrestres, aéreos, marítimos, lacustres y fluviales",
+     "12500000.00",
+     "10404732.31",
+     "0.00"
+    ],
+    [
+     35701,
+     "Mantenimiento y conservación de maquinaria y equipo",
+     "3072736.00",
+     "1902106.12",
+     "0.00"
+    ],
+    [
+     35801,
+     "Servicios de lavandería, limpieza e higiene",
+     "11437003.00",
+     "14039361.02",
+     "0.00"
+    ],
+    [
+     35901,
+     "Servicios de jardinería y fumigación",
+     "1721224.00",
+     "956748.99",
+     "0.00"
+    ],
+    [
+     36101,
+     "Difusión de mensajes sobre programas y actividades gubernamentales",
+     "11000000.00",
+     "9775187.40",
+     "0.00"
+    ],
+    [
+     37101,
+     "Pasajes aéreos nacionales para labores en campo y de supervisión",
+     "2679001.00",
+     "2492104.54",
+     "0.00"
+    ],
+    [
+     37104,
+     "Pasajes aéreos nacionales para servidores públicos de mando en el desempeño de comisiones y funciones oficiales",
+     "869839.00",
+     "867021.00",
+     "0.00"
+    ],
+    [
+     37201,
+     "Pasajes terrestres nacionales para labores en campo y de supervisión",
+     "1240757.00",
+     "1015408.55",
+     "0.00"
+    ],
+    [
+     37204,
+     "Pasajes terrestres nacionales para servidores públicos de mando en el desempeño de comisiones y funciones oficiales",
+     "216734.00",
+     "48034.82",
+     "0.00"
+    ],
+    [
+     37501,
+     "Viáticos nacionales para labores en campo y de supervisión",
+     "9546953.00",
+     "7595724.96",
+     "0.00"
+    ],
+    [
+     37504,
+     "Viáticos nacionales para servidores públicos en el desempeño de funciones oficiales",
+     "1903375.00",
+     "913655.11",
+     "0.00"
+    ],
+    [
+     37901,
+     "Gastos para operativos y trabajos de campo en áreas rurales",
+     "26736588.00",
+     "26032103.00",
+     "0.00"
+    ],
+    [
+     38401,
+     "Exposiciones",
+     "59856.00",
+     "59640.00",
+     "0.00"
+    ],
+    [
+     39202,
+     "Otros impuestos y derechos",
+     "3793602.00",
+     "2352522.43",
+     "0.00"
+    ],
+    [
+     39401,
+     "Erogaciones por resoluciones por autoridad competente",
+     "25000000.00",
+     "15135595.44",
+     "0.00"
+    ],
+    [
+     39801,
+     "Impuesto sobre nóminas",
+     "17800001.00",
+     "14568599.51",
+     "0.00"
+    ],
+    [
+     44105,
+     "Apoyo a voluntarios que participan en diversos programas federales",
+     "4432732218.00",
+     "4255183304.27",
+     "0.00"
+    ]
+   ],
+   "n_filas": 93,
+   "ms": 13,
+   "huella_sql": "18ff4548dc41e860"
+  },
+  "P0007": [
+   {
+    "columnas": [
+     "programa_clave",
+     "programa",
+     "ramo"
+    ],
+    "filas": [
+     [
+      "E001",
+      "Operación y mantenimiento de infraestructura hídrica",
+      "Medio Ambiente y Recursos Naturales"
+     ],
+     [
+      "G010",
+      "Gestión integral y sustentable del agua",
+      "Medio Ambiente y Recursos Naturales"
+     ],
+     [
+      "K007",
+      "Infraestructura de agua potable, alcantarillado y saneamiento",
+      "Medio Ambiente y Recursos Naturales"
+     ],
+     [
+      "K129",
+      "Infraestructura para la Protección de Centros de Población y Áreas Productivas",
+      "Medio Ambiente y Recursos Naturales"
+     ],
+     [
+      "S074",
+      "Agua Potable, Drenaje y Tratamiento",
+      "Medio Ambiente y Recursos Naturales"
+     ],
+     [
+      "U001",
+      "Programa de Devolución de Derechos",
+      "Medio Ambiente y Recursos Naturales"
+     ],
+     [
+      "U008",
+      "Saneamiento de Aguas Residuales",
+      "Medio Ambiente y Recursos Naturales"
+     ]
+    ],
+    "n_filas": 7,
+    "ms": 70,
+    "huella_sql": "12fe5e14c94f3634",
+    "supuesto": "Programas clasificados en la subfunción Ordenación de Aguas Residuales, Drenaje y Alcantarillado, 2020 a 2025"
+   },
+   {
+    "columnas": [
+     "programa_clave",
+     "programa",
+     "ramo"
+    ],
+    "filas": [
+     [
+      "K007",
+      "Infraestructura de agua potable, alcantarillado y saneamiento",
+      "Medio Ambiente y Recursos Naturales"
+     ],
+     [
+      "U008",
+      "Saneamiento de Aguas Residuales",
+      "Medio Ambiente y Recursos Naturales"
+     ]
+    ],
+    "n_filas": 2,
+    "ms": 1343,
+    "huella_sql": "f6703e91e15528a9",
+    "supuesto": "Programas cuyo nombre menciona aguas residuales o saneamiento, 2020 a 2025"
+   }
+  ],
+  "P0012": [
+   {
+    "columnas": [
+     "ramo",
+     "aprobado"
+    ],
+    "filas": [
+     [
+      "Instituto Mexicano del Seguro Social",
+      "481083003861.00"
+     ],
+     [
+      "Entidades no Sectorizadas",
+      "165352211570.00"
+     ],
+     [
+      "Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado",
+      "81687181417.00"
+     ],
+     [
+      "Aportaciones Federales para Entidades Federativas y Municipios",
+      "81220460093.00"
+     ],
+     [
+      "Salud",
+      "59089658509.00"
+     ],
+     [
+      "Aportaciones a Seguridad Social",
+      "9896427240.00"
+     ],
+     [
+      "Defensa Nacional",
+      "7053533592.00"
+     ],
+     [
+      "Marina",
+      "3521182018.00"
+     ]
+    ],
+    "n_filas": 8,
+    "ms": 103,
+    "huella_sql": "c00ed4391b8be819",
+    "supuesto": "Clasificación funcional: función Salud, ejercicio más reciente (2025), presupuesto aprobado por ramo"
+   },
+   {
+    "columnas": [
+     "programa_clave",
+     "programa",
+     "aprobado"
+    ],
+    "filas": [
+     [
+      "E023",
+      "Atención a la Salud",
+      "30510335454.00"
+     ],
+     [
+      "E010",
+      "Formación y capacitación de recursos humanos para la salud",
+      "7847903626.00"
+     ],
+     [
+      "E036",
+      "Programa de vacunación",
+      "4571752397.00"
+     ],
+     [
+      "M001",
+      "Actividades de apoyo administrativo",
+      "4233499468.00"
+     ],
+     [
+      "E040",
+      "Servicios de asistencia social integral",
+      "4011511308.00"
+     ],
+     [
+      "P020",
+      "Salud materna, sexual y reproductiva",
+      "2847979435.00"
+     ],
+     [
+      "U012",
+      "Fortalecimiento de los Servicios Estatales de Salud",
+      "2731811544.00"
+     ],
+     [
+      "E022",
+      "Investigación y desarrollo tecnológico en salud",
+      "2445369917.00"
+     ],
+     [
+      "E025",
+      "Prevención y atención contra las adicciones",
+      "1510056857.00"
+     ],
+     [
+      "P012",
+      "Rectoría en Salud",
+      "1031698970.00"
+     ],
+     [
+      "U008",
+      "Prevención y Control de Sobrepeso, Obesidad y Diabetes",
+      "913951377.00"
+     ],
+     [
+      "U009",
+      "Vigilancia epidemiológica",
+      "835656713.00"
+     ],
+     [
+      "P013",
+      "Asistencia social y protección del paciente",
+      "732669642.00"
+     ],
+     [
+      "P018",
+      "Prevención y control de enfermedades",
+      "688362899.00"
+     ],
+     [
+      "G004",
+      "Protección Contra Riesgos Sanitarios",
+      "673132209.00"
+     ],
+     [
+      "P016",
+      "Prevención y atención de VIH/SIDA y otras ITS",
+      "614745077.00"
+     ],
+     [
+      "O001",
+      "Actividades de apoyo a la función pública y buen gobierno",
+      "173939519.00"
+     ],
+     [
+      "E041",
+      "Protección y restitución de los derechos de las niñas, niños y adolescentes",
+      "100931744.00"
+     ],
+     [
+      "R001",
+      "Provisiones para Proyectos de Inversión",
+      "65222298.00"
+     ],
+     [
+      "K011",
+      "Proyectos de infraestructura social de salud",
+      "49197247.00"
+     ],
+     [
+      "S039",
+      "Programa de Atención a Personas con Discapacidad",
+      "42684553.00"
+     ],
+     [
+      "K025",
+      "Proyectos de inmuebles (oficinas administrativas)",
+      "34949188.00"
+     ],
+     [
+      "G005",
+      "Regulación y vigilancia de establecimientos y servicios de atención médica",
+      "25830105.00"
+     ],
+     [
+      "K027",
+      "Mantenimiento de infraestructura",
+      "0.00"
+     ]
+    ],
+    "n_filas": 24,
+    "ms": 62,
+    "huella_sql": "98c5898b21ffae2e",
+    "supuesto": "Clasificación administrativa: ramo 12 Salud, ejercicio más reciente (2025), presupuesto aprobado por programa"
+   }
+  ],
+  "P0016": {
+   "columnas": [
+    "ejercicio",
+    "programa_clave",
+    "programa",
+    "pagado"
+   ],
+   "filas": [
+    [
+     2024,
+     "I013",
+     "FONE Servicios Personales",
+     "22464950258.40"
+    ],
+    [
+     2024,
+     "I014",
+     "FONE Otros de Gasto Corriente",
+     "875274531.00"
+    ],
+    [
+     2024,
+     "I015",
+     "FONE Gasto de Operación",
+     "565091053.00"
+    ],
+    [
+     2025,
+     "I013",
+     "FONE Servicios Personales",
+     "22642175442.70"
+    ],
+    [
+     2025,
+     "I014",
+     "FONE Otros de Gasto Corriente",
+     "908970742.21"
+    ],
+    [
+     2025,
+     "I015",
+     "FONE Gasto de Operación",
+     "594019622.00"
+    ]
+   ],
+   "n_filas": 6,
+   "ms": 22,
+   "huella_sql": "73a05697cba1ab94"
+  }
+ }
+}

@@ -1,0 +1,31 @@
+archivo,orden_aleatorio,folio,decision,pregunta_id,motivo
+2026.JSON,1,340026300036626,incluida,P0001,ambigua
+2026.JSON,2,340026300072726,descartada,,Pide número de plazas autorizadas: no es cifra monetaria.
+2026.JSON,3,340026300265626,descartada,,Pide datos de contratos rescindidos y garantías: no es cifra presupuestaria.
+2026.JSON,4,340026300257826,descartada,,Pide copia de oficios.
+2026.JSON,5,340026300138226,incluida,P0002,abstenerse
+2026.JSON,6,340026300048426,incluida,P0003,abstenerse
+2026.JSON,7,340026300124726,incluida,P0004,abstenerse
+2026.JSON,8,340026300223726,incluida,P0005,abstenerse
+2026.JSON,9,340026300284926,descartada,,Pide la nómina de funcionarios específicos.
+2026.JSON,10,340026300019726,incluida,P0006,responder
+2026.JSON,11,340026300226326,incluida,P0007,ambigua
+2026.JSON,12,340026300129326,descartada,,Queja sobre pagos pendientes de licitaciones; no pide cifra.
+2026.JSON,13,340026300232526,incluida,P0008,abstenerse
+2026.JSON,14,340026300043126,incluida,P0009,abstenerse
+2026.JSON,15,340026300018326,incluida,P0010,abstenerse
+2026.JSON,16,340026300016426,pendiente,,"Pide el gasto del tren interoceánico de 2019 a 2026: cobertura parcial, con 2019 y 2026 fuera de la base. Pendiente de decidir cómo evaluar preguntas parcialmente respondibles."
+2026.JSON,17,340026300021726,incluida,P0011,abstenerse
+2026.JSON,18,340026300235126,incluida,P0012,ambigua
+2026.JSON,19,340026300124426,incluida,P0013,abstenerse
+2026.JSON,20,340026300059526,incluida,P0014,abstenerse
+2026.JSON,21,340026300054926,descartada,,Pide registros fiscales (CFDI) de transferencias entre la UNAM y una asociación civil: no es cifra presupuestaria.
+2026.JSON,22,340026300249826,descartada,,"Pregunta de política pública, sin cifra."
+2026.JSON,23,340026300238526,descartada,,Pide un oficio.
+2026.JSON,24,340026300159226,descartada,,Pide documentos de adecuaciones presupuestales.
+2026.JSON,25,340026300200226,descartada,,"Duplicado de la candidata 6 (folio 340026300048426), mismo texto y mismo solicitante."
+2026.JSON,26,340026300218426,incluida,P0015,abstenerse
+2026.JSON,27,340026300014226,incluida,P0016,responder
+2026.JSON,28,340026300101726,descartada,,Pide número de unidades de igualdad de género: no es cifra monetaria.
+2026.JSON,29,340026300216026,incluida,P0017,abstenerse
+2026.JSON,30,340026300271926,descartada,,Pide salario y tabulador de una categoría de puesto.

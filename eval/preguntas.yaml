@@ -1,0 +1,327 @@
+# Conjunto de evaluacion. Reglas y criterios en eval/README.md.
+#
+# Cada pregunta la redacta una persona a partir de una fuente rastreable.
+# No se generan preguntas con modelos de lenguaje.
+#
+# Validar:   .venv/Scripts/python.exe experiments/validar_conjunto.py --sin-base
+# Ejecutar:  .venv/Scripts/python.exe experiments/validar_conjunto.py
+#
+# Plantillas. Copiar la que corresponda debajo de la ultima linea de comentario,
+# quitar los "#" y reemplazar lo que esta entre < >.
+#
+# --- Pregunta a responder ---
+# - id: P0001
+#   pregunta: "<texto tal como aparece en la fuente>"
+#   ruta: sql
+#   comportamiento: responder
+#   origen:
+#     tipo: solicitud_pnt
+#     referencia: "<folio, URL o documento>"
+#   sql: |
+#     SELECT <...>
+#     FROM semantica.gasto
+#     WHERE <...>
+#   verificacion:
+#     documento: "<documento oficial que confirma la respuesta>"
+#     ubicacion: "<pagina, cuadro o renglon>"
+#     valor: "<cifra tal como aparece>"
+#   autor: RSD
+#   fecha: 2026-09-18
+#
+# --- Pregunta ambigua ---
+# - id: P0002
+#   pregunta: "<texto>"
+#   ruta: sql
+#   comportamiento: ambigua
+#   origen:
+#     tipo: variante
+#     referencia: P0001
+#   interpretaciones:
+#     - supuesto: "<primera lectura posible>"
+#       sql: |
+#         SELECT <...>
+#     - supuesto: "<segunda lectura posible>"
+#       sql: |
+#         SELECT <...>
+#   autor: RSD
+#   fecha: 2026-09-18
+#
+# --- Pregunta no respondible ---
+# - id: P0003
+#   pregunta: "<texto>"
+#   ruta: sql
+#   comportamiento: abstenerse
+#   origen:
+#     tipo: otro
+#     referencia: "<de donde surgio>"
+#   motivo: "<por que los datos disponibles no permiten responder>"
+#   autor: RSD
+#   fecha: 2026-09-18
+
+- id: P0001
+  pregunta: Solicito el monto total ejercido en combustible para vehiculos oficiales en 2025
+  ruta: sql
+  comportamiento: ambigua
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 340026300036626
+  interpretaciones:
+  - supuesto: Todas las partidas de combustible para vehículos (26101 a 26104), gobierno federal completo
+    sql: |
+      SELECT sum(ejercido) AS ejercido
+      FROM semantica.gasto
+      WHERE ejercicio = 2025
+        AND partida_clave BETWEEN 26101 AND 26104
+  - supuesto: Solo combustible para vehículos de servicios administrativos y asignados a servidores públicos (26103 y 26104), gobierno federal completo
+    sql: |
+      SELECT sum(ejercido) AS ejercido
+      FROM semantica.gasto
+      WHERE ejercicio = 2025
+        AND partida_clave IN (26103, 26104)
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-18'
+  notas: 'Etapa explícita: ejercido. La solicitud iba dirigida a la SHCP, pero leída literalmente no indica de quién son los vehículos; el sistema no conoce al destinatario. La ambigüedad está en qué partidas cuentan como ''vehículos oficiales''.'
+
+- id: P0002
+  pregunta: solicito en formato de datos abiertos (Excel/CSV) la información contenida en el Sistema de Recursos Federales Transferidos (SRFT) correspondiente al primer trimestre del ejercicio fiscal 2026 para los 7 municipios del estado de Baja California.
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 340026300138226
+  motivo: La base cubre 2020 a 2025 y desagrega hasta entidad federativa; no incluye 2026, ni municipios, ni el Sistema de Recursos Federales Transferidos.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-18'
+
+- id: P0003
+  pregunta: Con que ramo y partida presupuestal se etiquetan los recursos de la subcuenta de cesantia,vejez y cuota social que son transferidos por las administradoras de los fondos para el retiro(AFORE)
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 340026300048426
+  motivo: Pregunta por la clasificación de recursos que ingresan al Gobierno Federal desde las AFORE; la base contiene solo el ejercicio del gasto, no ingresos ni traspasos.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-18'
+
+- id: P0004
+  pregunta: Me gustaría saber, de 2012 a 2025, cómo se distribuyeron los montos de las renuncias recaudatorias (o estímulos fiscales o gastos tributarios) entre grandes contribuyentes, tanto personas físicas como morales, y el resto de contribuyentes.
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 340026300124726
+  motivo: Los gastos tributarios son renuncias recaudatorias, del lado del ingreso; la base contiene solo gasto ejercido. Además abarca de 2012 a 2019, fuera de la cobertura.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-18'
+
+- id: P0005
+  pregunta: se solicita el presupuesto destinado para el museo interactivo Papagayo, ubicado en Villahermosa Tabasco
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 340026300223726
+  motivo: La base no identifica proyectos por su nombre y la pregunta no indica ejercicio fiscal.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-18'
+
+- id: P0006
+  pregunta: Solicito el desglose del presupuesto asignado al CONAFE en el ejercicio fiscal 2024, indicando las partidas presupuestarias, montos ejercidos y subeiercidos
+  ruta: sql
+  comportamiento: responder
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 340026300019726
+  sql: |
+    SELECT partida_clave, partida,
+           sum(aprobado) AS asignado,
+           sum(ejercido) AS ejercido,
+           sum(modificado) - sum(devengado) AS subejercicio
+    FROM semantica.gasto
+    WHERE ejercicio = 2024
+      AND ramo_clave = 11
+      AND unidad_responsable_clave = 'L6W'
+    GROUP BY partida_clave, partida
+    ORDER BY partida_clave
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-18'
+  notas: '''Asignado'' se lee como aprobado. ''Subejercido'' se calcula como modificado menos devengado: es la definición de la Cuenta Pública, verificada en el estado analítico del ISSSTE 2024, donde la columna de subejercicio es exactamente esa diferencia. El CONAFE es la unidad L6W del ramo 11. Se conserva la errata ''subeiercidos'' del original. La solicitud pide además informes trimestrales, fuera del fragmento.'
+
+- id: P0007
+  pregunta: La relación de los programas presupuestarios vinculados con el saneamiento de aguas residuales y el tratamiento de aguas residuales.
+  ruta: sql
+  comportamiento: ambigua
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 340026300226326
+  interpretaciones:
+  - supuesto: Programas clasificados en la subfunción Ordenación de Aguas Residuales, Drenaje y Alcantarillado, 2020 a 2025
+    sql: |
+      SELECT DISTINCT programa_clave, programa, ramo
+      FROM semantica.gasto
+      WHERE subfuncion = 'Ordenación de Aguas Residuales, Drenaje y Alcantarillado'
+      ORDER BY programa_clave, ramo
+  - supuesto: Programas cuyo nombre menciona aguas residuales o saneamiento, 2020 a 2025
+    sql: |
+      SELECT DISTINCT programa_clave, programa, ramo
+      FROM semantica.gasto
+      WHERE programa ILIKE '%residual%'
+         OR programa ILIKE '%saneamiento%'
+      ORDER BY programa_clave, ramo
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-18'
+  notas: El fragmento no indica periodo; la solicitud completa pide 2018 a 2026, parcialmente fuera de la base. 'Vinculados' admite lectura por clasificación funcional o por nombre del programa.
+
+- id: P0008
+  pregunta: Recursos Monetarios Federales otorgados al Municipio de Valle de Bravo desde 2023
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 340026300232526
+  motivo: La base desagrega el gasto hasta entidad federativa, no por municipio.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-18'
+
+- id: P0009
+  pregunta: Saldo disponible o recursos existentes en el FOTEASE al cierre de 2025.
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 340026300043126
+  motivo: La base no contiene saldos de fideicomisos.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-18'
+
+- id: P0010
+  pregunta: 'Monto total de remanentes: Informar la cifra exacta de los recursos que fueron transferidos a la Tesorería de la Federación (TESOFE) tras la extinción formal del Fideicomiso FONDEN (contrato 200323).'
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 340026300018326
+  motivo: La base no registra remanentes de fideicomisos extintos ni su entero a la Tesorería de la Federación.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-18'
+
+- id: P0011
+  pregunta: Si durante los ejercicios fiscales 2023, 2024 o 2025 existió asignación, autorización,etiquetado o liberación de recursos federales destinados a la reparación del daño,indemnización o atención a personas afectadas por irregularidades o fraudecometidos por la Notari´a Pública No. 24 del Estado de Querétaro.
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 340026300021726
+  motivo: 'La base no permite identificar recursos por el destino específico que se pregunta: la atención a los afectados de un caso particular.'
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-18'
+
+- id: P0012
+  pregunta: Solicito información sobre la distribución del presupuesto destinado al sector salud
+  ruta: sql
+  comportamiento: ambigua
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 340026300235126
+  interpretaciones:
+  - supuesto: 'Clasificación funcional: función Salud, ejercicio más reciente (2025), presupuesto aprobado por ramo'
+    sql: |
+      SELECT ramo, sum(aprobado) AS aprobado
+      FROM semantica.gasto
+      WHERE ejercicio = 2025
+        AND funcion = 'Salud'
+      GROUP BY ramo
+      ORDER BY aprobado DESC
+  - supuesto: 'Clasificación administrativa: ramo 12 Salud, ejercicio más reciente (2025), presupuesto aprobado por programa'
+    sql: |
+      SELECT programa_clave, programa, sum(aprobado) AS aprobado
+      FROM semantica.gasto
+      WHERE ejercicio = 2025
+        AND ramo_clave = 12
+      GROUP BY programa_clave, programa
+      ORDER BY aprobado DESC
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-18'
+  notas: 'No indica ejercicio. ''Sector salud'' admite lectura funcional o administrativa, con resultados muy distintos: el ramo 12 concentra una fracción menor del gasto en salud, que fluye sobre todo por IMSS, ISSSTE y aportaciones a entidades. ''Destinado'' se lee como aprobado.'
+
+- id: P0013
+  pregunta: en el hospital nacional homeopático, el presupuesto asignado para el vestuario del personal adscrito a esta unidad
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 340026300124426
+  motivo: El Hospital Nacional Homeopático no figura como unidad responsable en la base, de modo que su gasto no puede aislarse; además la pregunta no indica ejercicio.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-18'
+
+- id: P0014
+  pregunta: Se solicita informar el monto exacto de la partida presupuestaria federal transferida a CFE Suministrador de Servicios Básicos para cubrir el subsidio de la Tarifa 1A en la zona de Tijuana (CP 22320) durante el primer bimestre de 2026.
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 340026300059526
+  motivo: Pregunta por 2026 y a nivel de código postal; la base cubre 2020 a 2025 y desagrega hasta entidad federativa.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-18'
+
+- id: P0015
+  pregunta: Cual fue el monto de los recursos no comprometidos ni ejercidos que fueron reintegrados a la Tesorería de la Federación durante el ejercicio fiscal 2025 del Estado de Campeche en lo que respecta a los Siguientes Fondos:Fondo Aportaciones para Servicio de Salud (FASSA)Fondo de Aportaciones Múltiples (FAM)Fondo de Aportaciones para Educación Tecnológica y de Adultos (FAETA)Fondo de Aportaciones para Nómina Educativa y Gasto Operativo (FONE)Fondo de Aportaciones para el Fortalecimiento de las Entidades Federativas (FAFEF)Fondo de Aportaciones para el Fortalecimiento de los Municipios y de las Demarcaciones Territoriales del Distrito Federal (FORTAMUN)Fondo de Aportaciones para la Seguridad Pública de los Estados y del Distrito Federal (FASP)Fondo de Aportaciones para la Infraestructura Social (FAIS)Fondo de Estabilización de los Ingresos de las Entidades Federativas (FEIEF)Fondo de apoyo para infraestructura y seguridad (FAIyS)Fondo de extracción de hidrocarburos (FONEXHIDRO)Fondo general de participaciones (FGP)
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 340026300218426
+  motivo: La base no registra reintegros a la Tesorería de la Federación.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-18'
+
+- id: P0016
+  pregunta: Cuanto recurso se proporcionó a Michoacán correspondiente al Fondo de Aportaciones para la Nómina Educativa y Gasto Operativo (FONE) entre 2024 y 2025.
+  ruta: sql
+  comportamiento: responder
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 340026300014226
+  sql: |
+    SELECT ejercicio, programa_clave, programa, sum(pagado) AS pagado
+    FROM semantica.gasto
+    WHERE ejercicio IN (2024, 2025)
+      AND ramo_clave = 33
+      AND programa_clave IN ('I013', 'I014', 'I015', 'I016')
+      AND entidad_federativa = 'Michoacán'
+    GROUP BY ejercicio, programa_clave, programa
+    ORDER BY ejercicio, programa_clave
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-18'
+  notas: '''Se proporcionó'' se lee como pagado. El FONE se compone de cuatro programas del ramo 33 (I013 a I016), que la base solo nombra por sigla: el nombre completo que usa el ciudadano no aparece en ningún catálogo. La solicitud pide además desglosar por programa o rubro, que es lo que agrupa el SQL.'
+
+- id: P0017
+  pregunta: información sobre el ingreso correspondiente al pago efectuado por la Fédération Internationale de Football Association (FIFA) por el uso del Alcázar del Castillo de Chapultepec el 10 de junio de 2026:1. Monto exacto que ingresó a la Tesorería de la Federación por concepto de ese pago.
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 340026300216026
+  motivo: Pregunta por un ingreso de 2026; la base contiene solo gasto de 2020 a 2025.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-18'
