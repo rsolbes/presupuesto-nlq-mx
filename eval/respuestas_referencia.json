@@ -1,5 +1,5 @@
 {
- "generado": "2026-09-18T12:18:10",
+ "generado": "2026-09-21T09:29:57",
  "rol": "consulta_nlq",
  "preguntas": {
   "P0001": [
@@ -13,7 +13,7 @@
      ]
     ],
     "n_filas": 1,
-    "ms": 271,
+    "ms": 330,
     "huella_sql": "cecfd7fb62c1f83b",
     "supuesto": "Todas las partidas de combustible para vehículos (26101 a 26104), gobierno federal completo"
    },
@@ -27,7 +27,7 @@
      ]
     ],
     "n_filas": 1,
-    "ms": 107,
+    "ms": 123,
     "huella_sql": "4c64dad77d0c732d",
     "supuesto": "Solo combustible para vehículos de servicios administrativos y asignados a servidores públicos (26103 y 26104), gobierno federal completo"
    }
@@ -694,7 +694,7 @@
     ]
    ],
    "n_filas": 93,
-   "ms": 13,
+   "ms": 15,
    "huella_sql": "18ff4548dc41e860"
   },
   "P0007": [
@@ -742,7 +742,7 @@
      ]
     ],
     "n_filas": 7,
-    "ms": 70,
+    "ms": 50,
     "huella_sql": "12fe5e14c94f3634",
     "supuesto": "Programas clasificados en la subfunción Ordenación de Aguas Residuales, Drenaje y Alcantarillado, 2020 a 2025"
    },
@@ -765,7 +765,7 @@
      ]
     ],
     "n_filas": 2,
-    "ms": 1343,
+    "ms": 1315,
     "huella_sql": "f6703e91e15528a9",
     "supuesto": "Programas cuyo nombre menciona aguas residuales o saneamiento, 2020 a 2025"
    }
@@ -997,6 +997,114 @@
    "n_filas": 6,
    "ms": 22,
    "huella_sql": "73a05697cba1ab94"
+  },
+  "P0023": [
+   {
+    "columnas": [
+     "aprobado"
+    ],
+    "filas": [
+     [
+      "1191623573035.00"
+     ]
+    ],
+    "n_filas": 1,
+    "ms": 101,
+    "huella_sql": "05c36ea550b8f9c6",
+    "supuesto": "Subsidios por objeto del gasto: partidas del concepto 4300, Subsidios y subvenciones"
+   },
+   {
+    "columnas": [
+     "aprobado"
+    ],
+    "filas": [
+     [
+      "1203277023906.00"
+     ]
+    ],
+    "n_filas": 1,
+    "ms": 314,
+    "huella_sql": "52b2d082bfea0323",
+    "supuesto": "Subsidios por clasificación programática: programas de modalidad S (Sujetos a Reglas de Operación) y U (Otros Subsidios)"
+   }
+  ],
+  "P0025": [
+   {
+    "columnas": [
+     "programa_clave",
+     "programa",
+     "aprobado",
+     "ejercido"
+    ],
+    "filas": [
+     [
+      "G007",
+      "Regulación, modernización y promoción de la actividad minera",
+      "176910940.00",
+      "139610858.12"
+     ]
+    ],
+    "n_filas": 1,
+    "ms": 27,
+    "huella_sql": "188c3be1c7e32755",
+    "supuesto": "Ejercicio más reciente (2025), por programa"
+   },
+   {
+    "columnas": [
+     "ejercicio",
+     "aprobado",
+     "ejercido"
+    ],
+    "filas": [
+     [
+      2020,
+      "90434612.00",
+      "113099629.20"
+     ],
+     [
+      2021,
+      "81950664.00",
+      "310125094.00"
+     ],
+     [
+      2022,
+      "84997030.00",
+      "234009667.90"
+     ],
+     [
+      2023,
+      "104098716.00",
+      "157867727.44"
+     ],
+     [
+      2024,
+      "183998154.00",
+      "150645402.43"
+     ],
+     [
+      2025,
+      "176910940.00",
+      "139610858.12"
+     ]
+    ],
+    "n_filas": 6,
+    "ms": 26,
+    "huella_sql": "0735e5b9bf684400",
+    "supuesto": "Todos los ejercicios disponibles (2020 a 2025), por ejercicio"
+   }
+  ],
+  "P0029": {
+   "columnas": [
+    "ejercido"
+   ],
+   "filas": [
+    [
+     "176800098.30"
+    ]
+   ],
+   "n_filas": 1,
+   "ms": 19,
+   "huella_sql": "bf206899cda38146"
   }
  }
 }

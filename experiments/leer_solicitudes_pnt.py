@@ -124,9 +124,17 @@ def candidatas(nombre_archivo, registros):
     Solicitudes de informacion publica con alguna palabra del nucleo, cada una
     con su posicion en un orden aleatorio reproducible. La semilla se deriva
     del nombre del archivo: agregar otros anos no altera el orden de este.
+
+    Se deduplica por folio antes de sortear. La exportacion de la PNT puede
+    repetir una solicitud: en 2025, un mismo folio aparece 37 veces, con las
+    copias identicas salvo en TipoDerechoARCOP. Sin deduplicar, esa solicitud
+    tendria 37 oportunidades de salir en el sorteo en lugar de una.
     """
-    elegidas = []
+    elegidas, vistos = [], set()
     for r in registros:
+        if r["Folio"] in vistos:
+            continue
+        vistos.add(r["Folio"])
         if r.get("TipoSolicitud") != "Información pública":
             continue
         ks = palabras_nucleo(r.get("DescripcionSolicitud", ""))
@@ -138,22 +146,80 @@ def candidatas(nombre_archivo, registros):
     return sorted(((pos, r, ks) for pos, (r, ks) in zip(orden, elegidas)), key=lambda x: x[0])
 
 
+UMBRAL_SIMILITUD = 0.6
+
+
+def grupos_similares(textos):
+    """
+    Agrupa solicitudes casi identicas: dos solicitudes son similares si el
+    indice de Jaccard entre sus conjuntos de palabras (normalizadas, de cuatro
+    letras o mas) es de al menos UMBRAL_SIMILITUD. Los grupos se cierran por
+    transitividad. Detecta campanas de solicitudes con la misma plantilla y
+    solicitudes que repiten una pregunta cambiando solo un dato.
+
+    Devuelve, para cada texto, el indice del representante de su grupo.
+    """
+    conjuntos = [set(w for w in re.findall(r"[a-z]+", normalizar(t)) if len(w) >= 4)
+                 for t in textos]
+    padre = list(range(len(textos)))
+
+    def raiz(i):
+        while padre[i] != i:
+            padre[i] = padre[padre[i]]
+            i = padre[i]
+        return i
+
+    # Ordenar por tamano permite descartar pares cuya diferencia de tamano ya
+    # hace imposible alcanzar el umbral, sin compararlos.
+    orden = sorted(range(len(textos)), key=lambda i: len(conjuntos[i]))
+    for a_pos, i in enumerate(orden):
+        a = conjuntos[i]
+        if not a:
+            continue
+        for j in orden[a_pos + 1:]:
+            b = conjuntos[j]
+            if len(a) < UMBRAL_SIMILITUD * len(b):
+                break
+            if len(a & b) >= UMBRAL_SIMILITUD * len(a | b):
+                padre[raiz(i)] = raiz(j)
+    return [raiz(i) for i in range(len(textos))]
+
+
 def exportar_candidatas(por_archivo_regs):
     CANDIDATAS.parent.mkdir(parents=True, exist_ok=True)
-    total = Counter()
+    filas = []
+    for nombre, regs in por_archivo_regs:
+        for pos, r, ks in candidatas(nombre, regs):
+            filas.append([nombre, pos, r["Folio"], r["FechaSolicitud"], " ".join(ks),
+                          r.get("Respuesta", ""),
+                          " ".join(r.get("DescripcionSolicitud", "").split()),
+                          " ".join(r.get("TextoRespuesta", "").split())])
+
+    # El grupo se identifica por el folio menor de sus miembros. Es estable ante
+    # el orden de los archivos, pero NO ante archivos nuevos: si llega una
+    # solicitud de folio menor que se une al grupo, el identificador cambia.
+    # Por eso el registro de revision cita al representante del grupo (su
+    # pregunta y su folio), nunca el identificador del grupo.
+    rep = grupos_similares([f[6] for f in filas])
+    miembros = Counter(rep)
+    folio_menor = {}
+    for k, f in zip(rep, filas):
+        folio_menor[k] = min(folio_menor.get(k, f[2]), f[2])
+
+    total, grupos = Counter(), Counter()
     # utf-8-sig: Excel en Windows solo reconoce los acentos de un CSV UTF-8 si lleva BOM.
     with open(CANDIDATAS, "w", encoding="utf-8-sig", newline="") as fh:
         w = csv.writer(fh)
-        w.writerow(["archivo", "orden_aleatorio", "folio", "fecha_solicitud",
-                    "palabras_clave", "tipo_respuesta", "solicitud", "texto_respuesta"])
-        for nombre, regs in por_archivo_regs:
-            for pos, r, ks in candidatas(nombre, regs):
-                w.writerow([nombre, pos, r["Folio"], r["FechaSolicitud"], " ".join(ks),
-                            r.get("Respuesta", ""),
-                            " ".join(r.get("DescripcionSolicitud", "").split()),
-                            " ".join(r.get("TextoRespuesta", "").split())])
-                total[nombre] += 1
-    return total
+        w.writerow(["archivo", "orden_aleatorio", "folio", "fecha_solicitud", "palabras_clave",
+                    "tipo_respuesta", "solicitud", "texto_respuesta",
+                    "grupo_similar", "tamano_grupo"])
+        for k, f in zip(rep, filas):
+            n = miembros[k]
+            w.writerow(f + (["G" + folio_menor[k], n] if n > 1 else ["", 1]))
+            total[f[0]] += 1
+            if n > 1:
+                grupos["G" + folio_menor[k]] = n
+    return total, grupos
 
 
 def main():
@@ -177,12 +243,14 @@ def main():
              + " por `experiments/leer_solicitudes_pnt.py`. Solo estadisticas: "
                "el texto de las solicitudes no se reproduce aqui.")
     L += ["", "## Archivos", "",
-          "| Archivo | Registros | JSON valido | Reparados | Irrecuperables | Primera solicitud | Ultima |",
-          "|---|---:|---:|---:|---:|---|---|"]
+          "| Archivo | Registros | JSON valido | Reparados | Irrecuperables | Folios unicos | Primera solicitud | Ultima |",
+          "|---|---:|---:|---:|---:|---:|---|---|"]
+    regs_por_nombre = dict(por_archivo_regs)
     for nombre, est, f0, f1 in por_archivo:
-        L.append("| `{}` | {:,} | {:,} | {:,} | {:,} | {} | {} |".format(
+        unicos = len({r["Folio"] for r in regs_por_nombre[nombre]})
+        L.append("| `{}` | {:,} | {:,} | {:,} | {:,} | {:,} | {} | {} |".format(
             nombre, est["registros"], est["json_valido"], est["reparados"],
-            est["irrecuperables"], f0, f1))
+            est["irrecuperables"], unicos, f0, f1))
 
     L += ["", "Folios unicos: {:,} de {:,} registros.".format(
         len({r["Folio"] for r in todos}), len(todos))]
@@ -192,7 +260,7 @@ def main():
         for v, n in Counter(r.get(campo, "") for r in todos).most_common():
             L.append("| {} | {:,} |".format(v or "(vacio)", n))
 
-    total = exportar_candidatas(por_archivo_regs)
+    total, grupos = exportar_candidatas(por_archivo_regs)
     L += ["", "## Candidatas para el conjunto de evaluacion", "",
           "Solicitudes de informacion publica con al menos una palabra del nucleo: "
           + ", ".join("`" + k + "`" for k in NUCLEO) + ". Se excluyen las de datos personales.",
@@ -202,6 +270,21 @@ def main():
           "", "| Archivo | Candidatas |", "|---|---:|"]
     for nombre, n in total.items():
         L.append("| `{}` | {:,} |".format(nombre, n))
+
+    en_grupo = sum(grupos.values())
+    L += ["", "## Solicitudes casi identicas", "",
+          "Dos candidatas son casi identicas si el indice de Jaccard entre sus conjuntos de "
+          "palabras es de al menos {}. Detecta campanas con una misma plantilla y solicitudes "
+          "que repiten una pregunta cambiando solo un dato (un estado, un municipio, una "
+          "dependencia).".format(UMBRAL_SIMILITUD),
+          "",
+          "{:,} de {:,} candidatas ({:.1%}) pertenecen a uno de {} grupos. En la revision, solo "
+          "el primer miembro de cada grupo que aparece en el orden aleatorio se evalua; los "
+          "demas se registran como casi duplicados.".format(
+              en_grupo, sum(total.values()), en_grupo / max(1, sum(total.values())), len(grupos)),
+          "", "| Grupo | Solicitudes |", "|---|---:|"]
+    for g, n in grupos.most_common():
+        L.append("| `{}` | {:,} |".format(g, n))
 
     INFORME.parent.mkdir(parents=True, exist_ok=True)
     INFORME.write_text("\n".join(L) + "\n", encoding="utf-8")

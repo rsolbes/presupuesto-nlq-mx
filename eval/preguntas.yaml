@@ -325,3 +325,335 @@
   autor: asistente-ia
   estado: propuesta
   fecha: '2026-09-18'
+
+- id: P0018
+  pregunta: Solicito saber cuál es el monto presupuestal total previsto en el presupuesto para el ejercicio 2025 para costear los gastos de los diputados federales por concepto de ““Atención ciudadana, transporte y hospedaje” y “asistencia legislativa”.
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 340026300222025
+  motivo: “Atención ciudadana, transporte y hospedaje” y “asistencia legislativa” son asignaciones internas de la Cámara de Diputados que no corresponden a partidas del Clasificador por Objeto del Gasto; en la Cuenta Pública quedan registradas dentro de partidas genéricas y no pueden aislarse.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+  notas: Se verificó que ninguna partida del clasificador lleva esos nombres. 'Previsto en el presupuesto' se leería como aprobado.
+
+- id: P0019
+  pregunta: conocer si existe un presupuesto específico asignado para ampliar el acceso al aborto en el país y en caso de ser así ¿cuál es el presupuesto designado por parte del gobierno para garantizar y ampliar el acceso al aborto?
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 330026325001475
+  motivo: La base no identifica un presupuesto específico para el acceso al aborto. El programa más cercano, P020 Salud materna, sexual y reproductiva, abarca mucho más.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+  notas: 'Se buscaron programas con ''aborto'', ''embarazo'' o ''reproductiv'' en su nombre: solo aparece el P020.'
+
+- id: P0020
+  pregunta: ¿Cómo se determina el presupuesto asignado al sector educativo en el Presupuesto de Egresos de la Federación?
+  ruta: documental
+  comportamiento: responder
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 330026325000906
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+  notas: 'Pregunta de procedimiento, no de cifras: corresponde a la ruta documental. Se responde con la normatividad del proceso presupuestario federal; la referencia documental se fijará al construir el corpus. La solicitud agrega una segunda pregunta, sobre estrategias de distribución, fuera del fragmento.'
+
+- id: P0021
+  pregunta: solicito información sobre el PRESUPUESTO DE 2025 asignado para la protección, restauración y conservación de los humedales registrados en el Inventario Nacional de Humedales
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 330026325000015
+  motivo: 'La base no identifica un presupuesto para la protección de humedales: ningún programa, partida ni subfunción los distingue.'
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+  notas: Se buscaron programas con 'humedal' en su nombre, sin resultados.
+
+- id: P0022
+  pregunta: Solicito los lineamientos y convocatoria de la prestación correspondiente a Los Juegos Nacionales, Culturales y Deportivos 2025 para los trabajadores de la Secretaria de Medio Ambiente y Recursos Naturales y el presupuesto autorizado para este 2025
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 330026325000689
+  motivo: La base no identifica el presupuesto de un evento o prestación laboral como los Juegos Nacionales, Culturales y Deportivos.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+
+- id: P0023
+  pregunta: ¿Cuanto es el monto total del presupuesto autorizado para el otorgamiento de subsidios federales en 2025?
+  ruta: sql
+  comportamiento: ambigua
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 340026300102025
+  interpretaciones:
+  - supuesto: 'Subsidios por objeto del gasto: partidas del concepto 4300, Subsidios y subvenciones'
+    sql: |
+      SELECT sum(aprobado) AS aprobado
+      FROM semantica.gasto
+      WHERE ejercicio = 2025
+        AND partida_clave BETWEEN 43000 AND 43999
+  - supuesto: 'Subsidios por clasificación programática: programas de modalidad S (Sujetos a Reglas de Operación) y U (Otros Subsidios)'
+    sql: |
+      SELECT sum(aprobado) AS aprobado
+      FROM semantica.gasto
+      WHERE ejercicio = 2025
+        AND left(programa_clave, 1) IN ('S', 'U')
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+  notas: '''Autorizado'' se lee como aprobado. ''Subsidios federales'' corresponde a dos clasificaciones distintas del gasto, con totales cercanos pero no iguales (1,191,623.6 contra 1,203,277.0 millones).'
+
+- id: P0024
+  pregunta: Gastos hechos por el gobierno federal para la organización de las elecciones judiciales, cuánto se gastó para comprar urnas, boletas, todo el material usado para esas elecciones
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 340026300007725
+  motivo: La base no identifica el gasto en la organización de la elección judicial ni el costo de materiales específicos como urnas o boletas.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+  notas: Se buscaron programas con 'judicial' o 'proceso electoral' en su nombre; ninguno corresponde. La solicitud pide además datos de proveedores, fuera del fragmento.
+
+- id: P0025
+  pregunta: ¿Cuál es el presupuesto aprobado y/o ejecutado para programas y proyectos relacionados con la explotación de recursos minerales?
+  ruta: sql
+  comportamiento: ambigua
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 340026300162325
+  interpretaciones:
+  - supuesto: Ejercicio más reciente (2025), por programa
+    sql: |
+      SELECT programa_clave, programa,
+             sum(aprobado) AS aprobado,
+             sum(ejercido) AS ejercido
+      FROM semantica.gasto
+      WHERE ejercicio = 2025
+        AND subfuncion = 'Extracción de Recursos Minerales excepto los Combustibles Minerales'
+      GROUP BY programa_clave, programa
+      ORDER BY programa_clave
+  - supuesto: Todos los ejercicios disponibles (2020 a 2025), por ejercicio
+    sql: |
+      SELECT ejercicio,
+             sum(aprobado) AS aprobado,
+             sum(ejercido) AS ejercido
+      FROM semantica.gasto
+      WHERE subfuncion = 'Extracción de Recursos Minerales excepto los Combustibles Minerales'
+      GROUP BY ejercicio
+      ORDER BY ejercicio
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+  notas: No indica ejercicio. 'Aprobado y/o ejecutado' pide las dos etapas; 'ejecutado' se lee como ejercido. 'Relacionados con la explotación de recursos minerales' se lee por la subfunción de la clasificación funcional.
+
+- id: P0026
+  pregunta: El monto total del presupuesto federal asignado y transferido al municipio de Acapetahua, Chiapas, correspondiente al ejercicio fiscal 2024 (de enero a diciembre).
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 330026325001039
+  motivo: La base desagrega el gasto hasta entidad federativa, no por municipio.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+
+- id: P0027
+  pregunta: Los programas gubernamentales (relacionados con los fines extrafiscales que persigue la Ley del IEPS) que han sido financiados, ya sea total o parcialmente, con los recursos públicos provenientes del Impuesto Especial sobre Producción y Servicios (IEPS), durante los últimos cinco ejercicios fiscales.
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 330026325001244
+  motivo: 'La base no vincula el gasto con la recaudación de un impuesto específico: la fuente de financiamiento no distingue los recursos provenientes del IEPS.'
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+
+- id: P0028
+  pregunta: solicito conocer el presupuesto que se destina para la manutención de los gatitos de Palacio Nacional
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 340026300096125
+  motivo: La base no identifica gastos a ese nivel de detalle.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+
+- id: P0029
+  pregunta: Solicito conocer el monto total ejercido por la Secretaría de Gobernación en publicidad oficial durante el año 2024
+  ruta: sql
+  comportamiento: responder
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 340026300186625
+  sql: |
+    SELECT sum(ejercido) AS ejercido
+    FROM semantica.gasto
+    WHERE ejercicio = 2024
+      AND ramo_clave = 4
+      AND partida_clave BETWEEN 36000 AND 36999
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+  notas: '''Publicidad oficial'' se lee como el concepto 3600 del Clasificador por Objeto del Gasto, cuyo nombre oficial es ''Servicios de comunicación social y publicidad''. Resultado: 176.8 millones. Alternativa por verificar: solo la partida 36101, ''Difusión de mensajes sobre programas y actividades gubernamentales'', da 175.9 millones; la diferencia es la partida 36901 de monitoreo de medios. La solicitud pide además el desglose por medio de comunicación, que la base no tiene, fuera del fragmento.'
+
+- id: P0030
+  pregunta: Desde que inició su mandato a la fecha ¿Cuál es el monto total de deuda pública del Presidente de la Republica Andrés Manuel López Obrador
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 330026324001548
+  motivo: La base registra el costo financiero de la deuda —intereses, comisiones y gastos, en el ramo 24 Deuda Pública—, no el saldo de la deuda. Responder con el ramo 24 confundiría el pago de intereses con el endeudamiento.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+
+- id: P0031
+  pregunta: ¿De cuánto es el presupuesto en el 2020, 2021, 2022 y 2023 para la adquisición del medicamento denominado "Ciclofosfamida" para el tratamiento de niños con cáncer?
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 330026324002882
+  motivo: La base registra el gasto en medicamentos de forma agregada por partida; no identifica medicamentos específicos.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+
+- id: P0032
+  pregunta: Cuánto presupuesto se destino para la Ceremonia conmemorativa de los 200 años de la República, celebrada el pasado 10 de octubre, donde estuvo presente la Presidenta Claudia Sheinbaum Pardo, desglosado por rubro
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 330026324002794
+  motivo: La base no identifica el presupuesto de un evento como una ceremonia conmemorativa.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+
+- id: P0033
+  pregunta: A cuanto asciende el monto o presupuesto asignado para el año 2021, 2022, 2023 y 2024 para cumplir con su obligación de reparar
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 330026324001896
+  motivo: Leída literalmente, la pregunta no dice de quién es la obligación de reparar, y la base no identifica un presupuesto por ese propósito.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+
+- id: P0034
+  pregunta: ¿Podrían proporcionarme datos precisos respecto a la cantidad de combustible adquirido por México a Estados Unidos durante el año 2019? ¿Cuantos barriles y litros de combustible fueron? ¿Cuanto presupuesto publico y bajo que conceptos fue erogado para realizar esta adquisición y translado del mismo?
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 330026324000510
+  motivo: Pregunta por 2019, fuera de la cobertura de la base, y por compras específicas de combustible importado que no se identifican en el gasto.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+
+- id: P0035
+  pregunta: Monto total de lo que se ha entregado al Municipio de Ocuituco de Morelos, de presupuesto federal, aportaciones y participaciones en el último año.
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 330026324000511
+  motivo: La base desagrega el gasto hasta entidad federativa, no por municipio.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+
+- id: P0036
+  pregunta: Solicito un informe detallado sobre la administración y uso del Fondo de Estabilización de los Ingresos Presupuestarios en los últimos 5 años.
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 330026324002978
+  motivo: La base no contiene saldos ni movimientos de fondos de estabilización.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+
+- id: P0037
+  pregunta: ¿A que cantidad asciede los recursos asiganados al municipio de La Independencia, Chiapas, provenientes de recursos Federales en el año 2023?
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 330026324000026
+  motivo: La base desagrega el gasto hasta entidad federativa, no por municipio.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+
+- id: P0038
+  pregunta: Monto transferido al Banco del Bienestar para efectos de realizar transferencias a beneficiarios de los programas sociales del gobierno federal con una frecuencia mensual desde que se tenga registro a la fecha.
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 330026324000916
+  motivo: La base registra el gasto anual por programa; no identifica transferencias mensuales ni el paso de los recursos por una institución bancaria.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+
+- id: P0039
+  pregunta: Del Presupuesto de Egresos de la Federación para el ejercicio fiscal 2024, cuyo artículo 2 dispone la cantidad de $9,066,045,800,000, ¿Qué cantidades se destinaron para el Fondo Federal Especial para la obligatoriedad y gratuidad de la Educación Superior, previsto en el artículo 3° de la Constitución Política de los Estados Unidos Mexicanos y con qué denominación se encuentra en el referido Presupuesto de Egresos de la Federación para el ejercicio fiscal 2024?
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 330026324000696
+  motivo: Ningún programa presupuestario de la base corresponde al Fondo Federal Especial para la obligatoriedad y gratuidad de la Educación Superior; los más cercanos son programas genéricos de servicios de educación superior.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+  notas: Se buscaron programas con 'gratuidad', 'obligatoriedad' o 'educación superior' en su nombre. La cifra que cita el ciudadano, 9,066,045,800,000 pesos, es el gasto neto total del PEF 2024; la base registra 10,406,689 millones aprobados porque suma en bruto, sin descontar transferencias internas.
+
+- id: P0040
+  pregunta: Cual es el presupuesto asignado para todos los sistemas tecnologicos y plataformas institucionales?Cuanto presupuesto se destina para manteniniento y mejora?
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 330026324002354
+  motivo: 'Pregunta subespecificada: no indica institución ni ejercicio, y ''sistemas tecnológicos y plataformas institucionales'' no corresponde a un concepto delimitado del clasificador.'
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'
+
+- id: P0041
+  pregunta: los datos exactos sobre cuánto se invirtió, gastó en la creación de plaza paseo de la feria en Zapotlan el Grande Ciudad Guzmán
+  ruta: sql
+  comportamiento: abstenerse
+  origen:
+    tipo: solicitud_pnt
+    referencia: folio 330026324002482
+  motivo: La base no identifica el gasto en obras específicas ni desagrega por municipio.
+  autor: asistente-ia
+  estado: propuesta
+  fecha: '2026-09-21'

@@ -94,9 +94,9 @@ Reglas con que se clasifica cada solicitud y se escribe su SQL de referencia. So
 
 | Palabras en la pregunta | Etapa |
 |---|---|
-| asignado, autorizado, aprobado, presupuestado, destinado | `aprobado` |
+| asignado, autorizado, aprobado, presupuestado, destinado, previsto | `aprobado` |
 | modificado | `modificado` |
-| ejercido | `ejercido` |
+| ejercido, ejecutado | `ejercido` |
 | devengado | `devengado` |
 | pagado, entregado, transferido, proporcionado, dispersado | `pagado` |
 | gasto, gastado, erogado, costó, sin etapa identificable | ambigua |
@@ -104,6 +104,10 @@ Reglas con que se clasifica cada solicitud y se escribe su SQL de referencia. So
 **Subejercicio.** Se calcula como `modificado - devengado`. Es la definición que usa la Cuenta Pública: en el estado analítico del ISSSTE 2024, la columna de subejercicio es exactamente esa diferencia en cada renglón.
 
 **Ejercicio no indicado.** Si la pregunta no dice de qué año, es ambigua; las interpretaciones declaran el supuesto, normalmente el ejercicio más reciente disponible.
+
+**Casi duplicados.** Las candidatas se agrupan por similitud de vocabulario (ver `experiments/salidas/solicitudes_pnt.md`). De cada grupo solo se evalúa el primer miembro que aparece en el orden aleatorio; los demás se registran como casi duplicados de él. Así una campaña de cientos de solicitudes con la misma plantilla aporta una sola pregunta, igual que cualquier otra.
+
+**Ruta documental.** Una pregunta sobre procedimientos, reglas o definiciones —cómo se determina, qué establece la norma— corresponde a la ruta `documental`, aunque trate de presupuesto. Su respuesta de referencia se fijará al construir el corpus documental.
 
 ## Dificultad
 

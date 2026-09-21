@@ -23,9 +23,69 @@ archivo,orden_aleatorio,folio,decision,pregunta_id,motivo
 2026.JSON,22,340026300249826,descartada,,"Pregunta de política pública, sin cifra."
 2026.JSON,23,340026300238526,descartada,,Pide un oficio.
 2026.JSON,24,340026300159226,descartada,,Pide documentos de adecuaciones presupuestales.
-2026.JSON,25,340026300200226,descartada,,"Duplicado de la candidata 6 (folio 340026300048426), mismo texto y mismo solicitante."
+2026.JSON,25,340026300200226,casi_duplicado,P0003,"Campaña sobre cesantía y vejez, ya representada por P0003 (folio 340026300048426)."
 2026.JSON,26,340026300218426,incluida,P0015,abstenerse
 2026.JSON,27,340026300014226,incluida,P0016,responder
 2026.JSON,28,340026300101726,descartada,,Pide número de unidades de igualdad de género: no es cifra monetaria.
 2026.JSON,29,340026300216026,incluida,P0017,abstenerse
 2026.JSON,30,340026300271926,descartada,,Pide salario y tabulador de una categoría de puesto.
+2025.JSON,1,340026300111025,casi_duplicado,P0003,"Campaña sobre cesantía y vejez, ya representada por P0003 (folio 340026300048426)."
+2025.JSON,2,340026300222025,incluida,P0018,abstenerse
+2025.JSON,3,340026300174625,pendiente,,"Pregunta por el presupuesto para la impresión de libros de texto gratuitos: el programa más cercano, B003 Producción y distribución de libros y materiales educativos, es más amplio. Cobertura aproximada; pendiente de decidir cómo evaluar preguntas parcialmente respondibles."
+2025.JSON,4,330026325000950,casi_duplicado,P0003,"Campaña sobre cesantía y vejez, ya representada por P0003 (folio 340026300048426)."
+2025.JSON,5,340026300086125,descartada,,Pide números de cuentas bancarias: no es cifra presupuestaria.
+2025.JSON,6,330026325001475,incluida,P0019,abstenerse
+2025.JSON,7,340026300069825,descartada,,"Pregunta por la motivación de reformas legales, sin cifra; fuera del corpus documental previsto."
+2025.JSON,8,330026325000906,incluida,P0020,responder
+2025.JSON,9,330026325000015,incluida,P0021,abstenerse
+2025.JSON,10,340026300150225,descartada,,Pregunta por el envío de un oficio.
+2025.JSON,11,340026300078025,casi_duplicado,P0003,"Campaña sobre cesantía y vejez, ya representada por P0003 (folio 340026300048426)."
+2025.JSON,12,340026300081125,casi_duplicado,P0003,"Campaña sobre cesantía y vejez, ya representada por P0003 (folio 340026300048426)."
+2025.JSON,13,340026300110725,casi_duplicado,P0003,"Campaña sobre cesantía y vejez, ya representada por P0003 (folio 340026300048426)."
+2025.JSON,14,330026325000988,casi_duplicado,P0003,"Campaña sobre cesantía y vejez, ya representada por P0003 (folio 340026300048426)."
+2025.JSON,15,340026300080025,casi_duplicado,P0003,"Campaña sobre cesantía y vejez, ya representada por P0003 (folio 340026300048426)."
+2025.JSON,16,330026325000689,incluida,P0022,abstenerse
+2025.JSON,17,330026325000967,casi_duplicado,P0003,"Campaña sobre cesantía y vejez, ya representada por P0003 (folio 340026300048426)."
+2025.JSON,18,340026300110925,casi_duplicado,P0003,"Campaña sobre cesantía y vejez, ya representada por P0003 (folio 340026300048426)."
+2025.JSON,19,340026300102025,incluida,P0023,ambigua
+2025.JSON,20,340026300007725,incluida,P0024,abstenerse
+2025.JSON,21,340026300162325,incluida,P0025,ambigua
+2025.JSON,22,330026325001039,incluida,P0026,abstenerse
+2025.JSON,23,340026300092625,descartada,,Pide datos de un contrato de fideicomiso privado.
+2025.JSON,24,330026325000973,casi_duplicado,P0003,"Campaña sobre cesantía y vejez, ya representada por P0003 (folio 340026300048426)."
+2025.JSON,25,340026300234425,casi_duplicado,P0003,"Campaña sobre cesantía y vejez, ya representada por P0003 (folio 340026300048426)."
+2025.JSON,26,340026300232825,descartada,,Pide reportes de un contrato de seguro de vida institucional.
+2025.JSON,27,340026300225425,descartada,,Pide copias de convenios de 2009 a 2015.
+2025.JSON,28,330026325001244,incluida,P0027,abstenerse
+2025.JSON,29,340026300096125,incluida,P0028,abstenerse
+2025.JSON,30,340026300186625,incluida,P0029,responder
+2024.JSON,1,330026324001085,casi_duplicado,P0003,"Campaña sobre cesantía y vejez, ya representada por P0003 (folio 340026300048426)."
+2024.JSON,2,330026324001548,incluida,P0030,abstenerse
+2024.JSON,3,330026324002882,incluida,P0031,abstenerse
+2024.JSON,4,330026324002794,incluida,P0032,abstenerse
+2024.JSON,5,330026324001896,incluida,P0033,abstenerse
+2024.JSON,6,330026324000510,incluida,P0034,abstenerse
+2024.JSON,7,330026324001741,descartada,,Pide los criterios de basificación de personal: no es cifra presupuestaria.
+2024.JSON,8,330026324000511,incluida,P0035,abstenerse
+2024.JSON,9,330026324001638,descartada,,Pide documentación sobre la construcción de una obra.
+2024.JSON,10,330026324002240,descartada,,Pide copia de un oficio.
+2024.JSON,11,330026324001017,casi_duplicado,P0003,"Campaña sobre cesantía y vejez, ya representada por P0003 (folio 340026300048426)."
+2024.JSON,12,330026324001015,casi_duplicado,P0003,"Campaña sobre cesantía y vejez, ya representada por P0003 (folio 340026300048426)."
+2024.JSON,13,330026324000433,descartada,,Trámite personal: copias certificadas de notificaciones de un vehículo.
+2024.JSON,14,330026324002978,incluida,P0036,abstenerse
+2024.JSON,15,330026324001084,casi_duplicado,P0003,"Campaña sobre cesantía y vejez, ya representada por P0003 (folio 340026300048426)."
+2024.JSON,16,330026324000026,incluida,P0037,abstenerse
+2024.JSON,17,330026324000996,casi_duplicado,P0003,Misma pregunta que P0003 (folio 340026300048426) con otra redacción; la regla léxica la ubica en un grupo distinto.
+2024.JSON,18,330026324000916,incluida,P0038,abstenerse
+2024.JSON,19,330026324000696,incluida,P0039,abstenerse
+2024.JSON,20,330026324001004,casi_duplicado,P0003,"Campaña sobre cesantía y vejez, ya representada por P0003 (folio 340026300048426)."
+2024.JSON,21,330026324002988,casi_duplicado,P0003,"Campaña sobre cesantía y vejez, ya representada por P0003 (folio 340026300048426)."
+2024.JSON,22,330026324000997,casi_duplicado,P0003,"Campaña sobre cesantía y vejez, ya representada por P0003 (folio 340026300048426)."
+2024.JSON,23,330026324001057,casi_duplicado,P0003,"Campaña sobre cesantía y vejez, ya representada por P0003 (folio 340026300048426)."
+2024.JSON,24,330026324002948,casi_duplicado,P0003,"Campaña sobre cesantía y vejez, ya representada por P0003 (folio 340026300048426)."
+2024.JSON,25,330026324001706,pendiente,,Pide el presupuesto de universidades autónomas con montos federales y estatales: la base no tiene los estatales ni identifica cada universidad estatal. Cobertura parcial; pendiente de decidir cómo evaluar preguntas parcialmente respondibles.
+2024.JSON,26,330026324002435,descartada,,Pide copias de documentos de 2018.
+2024.JSON,27,330026324000902,casi_duplicado,P0003,Misma pregunta que P0003 (folio 340026300048426) con otra redacción; la regla léxica la ubica en un grupo distinto.
+2024.JSON,28,330026324002354,incluida,P0040,abstenerse
+2024.JSON,29,330026324000745,descartada,,Trámite personal de una persona pensionada. La solicitud contiene datos personales.
+2024.JSON,30,330026324002482,incluida,P0041,abstenerse

@@ -132,6 +132,24 @@ def validar_estructura(p, vistos):
     return e
 
 
+# Patrones de datos personales. La PNT no anonimiza de forma consistente: entre
+# el 1 y el 2% de las solicitudes de 2024 a 2026 contienen alguno. Una pregunta
+# que los arrastre no puede entrar a un conjunto que se publica.
+DATOS_PERSONALES = {
+    "CURP": re.compile(r"\b[A-Z][AEIOUX][A-Z]{2}\d{6}[HM][A-Z]{5}[0-9A-Z]\d\b"),
+    "RFC de persona fisica": re.compile(r"\b[A-Z&Ñ]{4}\d{6}[A-Z0-9]{3}\b"),
+    "correo electronico": re.compile(r"\b[\w.+-]+@[\w-]+\.[\w.]+\b"),
+    "telefono": re.compile(r"(?<!\d)(?:\d[ -]?){10}(?!\d)"),
+}
+
+
+def validar_privacidad(p):
+    """Rechaza la pregunta si su texto contiene un patron de dato personal."""
+    texto = str(p.get("pregunta") or "")
+    return ["la pregunta contiene un posible dato personal ({})".format(nombre)
+            for nombre, patron in DATOS_PERSONALES.items() if patron.search(texto)]
+
+
 def cargar_solicitudes():
     """Texto original de cada solicitud, por folio. None si no esta disponible."""
     if not SOLICITUDES.exists():
@@ -328,6 +346,7 @@ def main():
         pid = p.get("id", "?")
         errores = validar_estructura(p, vistos)
         errores.extend(validar_literal(p, solicitudes))
+        errores.extend(validar_privacidad(p))
         vistos.add(pid)
         r = {"id": pid, "ruta": p.get("ruta"), "comportamiento": p.get("comportamiento"),
              "origen": (p.get("origen") or {}).get("tipo"), "estado": p.get("estado"),
