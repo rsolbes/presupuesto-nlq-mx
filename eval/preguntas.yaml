@@ -1,7 +1,7 @@
 # Conjunto de evaluacion. Reglas y criterios en eval/README.md.
 #
-# Cada pregunta la redacta una persona a partir de una fuente rastreable.
-# No se generan preguntas con modelos de lenguaje.
+# Cada pregunta parte de una fuente rastreable. Las redactadas con asistencia de
+# un modelo de lenguaje llevan origen.tipo: generada_ia (ver eval/README.md).
 #
 # Validar:   .venv/Scripts/python.exe experiments/validar_conjunto.py --sin-base
 # Ejecutar:  .venv/Scripts/python.exe experiments/validar_conjunto.py
